@@ -1,26 +1,10 @@
 import http from 'node:http';
 
 //Array para armazenamento de Quests
-const quests = [{
-    'id' : 1,
-    'title' : 'mission 1',
-    'description' : 'mission 1 a fazer',
-    'difficulty' : 'hard',
-    'xp' : 10,
-    'status' : 'true'
-},
-{
-    'id' : 2,
-    'title' : 'mission 2',
-    'description' : 'mission 2 a fazer',
-    'difficulty' : 'medium',
-    'xp' : 20,
-    'status' : 'false'
-}
-];
+const quests = [];
 
 //Variável para indexar os elementos do array
-const questId = 1;
+let questId = 0;
 
 
 const PORT = 3000;
@@ -49,9 +33,14 @@ const server = http.createServer((req,res)=>{
             //Guarda qual quest listar
             const index = quests.findIndex((quest) => quest.id === ID);
 
-            if(isNaN(ID)|| index === -1){// Verificação de incosistência de parâmetro ou id inexistênte na lista
+            if(isNaN(ID)){// Verificação de incosistência de parâmetro
                 res.writeHead(400, {'Content-type': 'application/json'});
-                return res.end(JSON.stringify({message: 'ID inválido ou não existente'}));
+                return res.end(JSON.stringify({message: 'ID inválido'}));
+            }
+
+            if(index === -1){//Verificação de id inexistênte na lista
+                res.writeHead(404, {'Content-type': 'application/json'});
+                return res.end(JSON.stringify({message: 'Quest não encontrada'}));
             }
 
             //Se tudo certo retorna a quest com id correspondente
@@ -61,6 +50,63 @@ const server = http.createServer((req,res)=>{
         //Caso nenhum parâmetro foi passado, retorna a lista completa de quests
         res.writeHead(200, {'Content-type': 'application/json'});
         res.end(JSON.stringify(quests));
+
+    }
+    else if(req.method === 'POST' && url.pathname === '/quests'){
+        //Variável para armazenar o corpo da requisição
+        let body = '';
+
+        //Executando cada pedaço de dados que chegam
+        req.on('data', (chunk)=>{
+            body += chunk;
+        });
+
+        req.on('end', ()=>{
+            
+            try{
+                if(!body.trim()){//Breve validação de corpo vazio antes do parse
+                    res.writeHead(400, {'Content-type': 'application/json'});
+                    return res.end(JSON.stringify({message: 'Requisição vazia'}));
+                }
+                
+                let data;
+
+                try{//Teste de Parse bem sucedido
+                    data = JSON.parse(body);
+                } catch(parseError){
+                    //Erro avisando que o body possue erro de formatação
+                    res.writeHead(400, {'Content-type': 'application/json'});
+                    return res.end(JSON.stringify({message: 'JSON mal formatado'}));
+                }
+
+                //Garante que existe, é string e não está vazia após o "trim"
+                if(!data.title || typeof data.title !== 'string' || !data.title.trim()){// Validação do campo obrigatório "title"
+                    res.writeHead(400, {'Content-type': 'application/json'});
+                    return res.end(JSON.stringify({message: 'O campo title é obrigatório e deve ser uma string'}));
+                }
+
+                const newQuest = {//Criação do objeto quest com as chaves do modelo de negócio
+                    id: ++questId ,
+                    title: data.title.trim(),
+                    description: typeof data.description === 'string' ? data.description.trim() : '',
+                    xp: data.xp ? Number(data.xp) : 0,
+                    difficulty: data.difficulty || 'easy',
+                    completed: typeof data.completed === 'boolean' ? data.completed : false //default falso
+                }
+                //Adicionando no fim do array de armazenamento a nova quest
+                quests.push(newQuest);
+
+                res.writeHead(201, {'Content-type': 'application/json'});
+                res.end(JSON.stringify(newQuest));
+
+            }catch(error){//Em caso de erro 
+                
+                res.writeHead(400, {'Content-type': 'application/json'});
+                res.end(JSON.stringify({error: 'Requisição inválida'}));
+
+            }
+        })
+
 
     }
     //Tratamento de rota não encontrada

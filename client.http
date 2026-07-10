@@ -1,0 +1,16 @@
+### Testar o Ping
+GET http://localhost:3000/ping
+### Listar todas as Quests
+GET http://localhost:3000/quests
+### Obter Quest por ID
+GET http://localhost:3000/quests?id=1
+### Criar uma Nova Quest
+POST http://localhost:3000/quests
+Content-Type: application/json
+
+{
+  "title":"Minha Nova Quest",
+  "description":"Esse é um teste de API no método POST",
+  "xp":100,
+  "difficulty":"Meio dificil"
+}
