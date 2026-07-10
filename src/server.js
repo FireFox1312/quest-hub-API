@@ -30,13 +30,15 @@ const server = http.createServer((req,res)=>{
 
             //Transformando em inteiro
             const ID = parseInt(idParam);
-            //Guarda qual quest listar
-            const index = quests.findIndex((quest) => quest.id === ID);
-
+            
             if(isNaN(ID)){// Verificação de incosistência de parâmetro
                 res.writeHead(400, {'Content-type': 'application/json'});
                 return res.end(JSON.stringify({message: 'ID inválido'}));
             }
+
+            //Guarda qual quest listar
+            const index = quests.findIndex((quest) => quest.id === ID);
+
 
             if(index === -1){//Verificação de id inexistênte na lista
                 res.writeHead(404, {'Content-type': 'application/json'});
