@@ -128,6 +128,7 @@ const server = http.createServer((req,res)=>{
             return res.end(JSON.stringify({message: 'ID inválido'}));
         }
 
+        //Pega a posição do array
         const index = quests.findIndex((quest) => quest.id === ID);
 
         if(index === -1){//Verifica se o id passado existe no array
@@ -176,6 +177,38 @@ const server = http.createServer((req,res)=>{
         
         })
         
+    }
+    
+    else if(req.method === 'PUT' && url.pathname === '/quests/complete'){
+
+        const idParam = url.searchParams.get('id');
+
+        if(idParam == null){//Verifica se foi passado algum parâmetro
+            res.writeHead(400,{'Content-type': 'application/json'});
+            return res.end(JSON.stringify({message: 'ID não informado'}));
+        }
+
+        const ID = parseInt(idParam);
+
+        if(isNaN(ID)){//Verifica se o parâmetro é um número
+            res.writeHead(400,{'Content-type': 'application/json'});
+            return res.end(JSON.stringify({message: 'ID inválido'}));
+        }
+
+        //Pega a posição do array
+        const index = quests.findIndex((quest) => quest.id === ID);
+
+        if(index === -1){//Verifica se o id passado existe no array
+            res.writeHead(404,{'Content-type': 'application/json'});
+            return res.end(JSON.stringify({message: 'Quest não encontrada'}));
+        }
+
+
+        //Altera a quest para completado
+        quests[index].completed = true;
+
+        res.writeHead(200,{'Content-type': 'application/json'});
+        res.end(JSON.stringify(quests[index]));
     }
 
     //Tratamento de rota não encontrada

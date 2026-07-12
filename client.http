@@ -14,3 +14,15 @@ Content-Type: application/json
   "xp":100,
   "difficulty":"Meio dificil"
 }
+
+### Testar o PUT
+PUT http://localhost:3000/quests?id=2
+
+{
+  "title": "Put testado",
+  "description": "Esse é um teste de API com o método PUT",
+  "difficulty": "GG Ezz"
+}
+
+### Testando endpoint /quests/complete
+PUT  http://localhost:3000/quests/complete?id=1
