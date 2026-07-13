@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Node.js-v24.18.0-green?style=for-the-badge&logo=node.js" alt="Node.js Version" />
-  <img src="https://img.shields.io/badge/Sprint%20Atual-Sprint%200-blue?style=for-the-badge&logo=git" alt="Sprint 0" />
+  <img src="https://img.shields.io/badge/Sprint%20Atual-Sprint%202-blue?style=for-the-badge&logo=git" alt="Sprint 2" />
   <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License" />
 </p>
 
