@@ -3,7 +3,7 @@ GET http://localhost:3000/ping
 ### Listar todas as Quests
 GET http://localhost:3000/quests
 ### Obter Quest por ID
-GET http://localhost:3000/quests?id=1
+GET http://localhost:3000/quests/1
 ### Criar uma Nova Quest
 POST http://localhost:3000/quests
 Content-Type: application/json
@@ -16,7 +16,7 @@ Content-Type: application/json
 }
 
 ### Testar o PUT
-PUT http://localhost:3000/quests?id=2
+PUT http://localhost:3000/quests/2
 Content-Type: application/json
 
 {
@@ -25,5 +25,5 @@ Content-Type: application/json
   "difficulty": "GG Ezz"
 }
 
-### Testando endpoint /quests/complete
-PUT  http://localhost:3000/quests/complete?id=1
+### Testando endpoint /quests/:id/complete
+PUT  http://localhost:3000/quests/2/complete

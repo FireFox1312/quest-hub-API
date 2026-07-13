@@ -1,228 +1,119 @@
-import http from 'node:http';
+import e from 'express';
+import express from 'express';
 
-//Array para armazenamento de Quests
-const quests = [];
-
-//Variável para indexar os elementos do array
-let questId = 0;
-
+//Objeto que vai conter todos o métodos do express
+const app = express();
 
 const PORT = 3000;
-const server = http.createServer((req,res)=>{
 
-    const url = new URL(req.url, `http://${req.headers.host}`); //Guarda a url
+//Fará o parse dos dados para JSON
+app.use(express.json());
 
-    //Endpoint de ping
-    if(req.method === 'GET' && url.pathname === '/ping'){
+const quests = [];
 
-        res.writeHead(200, {'Content-type': 'application/json'});
-        res.end(JSON.stringify({status: 'OK'}));
+let questId = 0;
 
-    }
-    //Endpoint de listagem do array "quests", com ou sem parâmetro (GET)
-    else if(req.method === 'GET' && url.pathname === '/quests'){
-        
-        
-        //Busca algum parâmetro na URL
-        const idParam = url.searchParams.get('id');
-
-        if(idParam !== null){//Verificação se foi passado algum parâmetro
-
-            //Transformando em inteiro
-            const ID = parseInt(idParam);
-            
-            if(isNaN(ID)){// Verificação de incosistência de parâmetro
-                res.writeHead(400, {'Content-type': 'application/json'});
-                return res.end(JSON.stringify({message: 'ID inválido'}));
-            }
-
-            //Guarda qual quest listar
-            const index = quests.findIndex((quest) => quest.id === ID);
-
-
-            if(index === -1){//Verificação de id inexistênte na lista
-                res.writeHead(404, {'Content-type': 'application/json'});
-                return res.end(JSON.stringify({message: 'Quest não encontrada'}));
-            }
-
-            //Se tudo certo retorna a quest com id correspondente
-            res.writeHead(200, {'Content-type': 'application/json'});
-            return res.end(JSON.stringify(quests[index])); 
-        }
-        //Caso nenhum parâmetro foi passado, retorna a lista completa de quests
-        res.writeHead(200, {'Content-type': 'application/json'});
-        res.end(JSON.stringify(quests));
-
-    }
-    else if(req.method === 'POST' && url.pathname === '/quests'){
-        //Variável para armazenar o corpo da requisição
-        let body = '';
-
-        //Executando cada pedaço de dados que chegam
-        req.on('data', (chunk)=>{
-            body += chunk;
-        });
-
-        req.on('end', ()=>{
-            
-            try{
-                if(!body.trim()){//Breve validação de corpo vazio antes do parse
-                    res.writeHead(400, {'Content-type': 'application/json'});
-                    return res.end(JSON.stringify({message: 'Requisição vazia'}));
-                }
-                
-                let data;
-
-                try{//Teste de Parse bem sucedido
-                    data = JSON.parse(body);
-                } catch(parseError){
-                    //Erro avisando que o body possue erro de formatação
-                    res.writeHead(400, {'Content-type': 'application/json'});
-                    return res.end(JSON.stringify({message: 'JSON mal formatado'}));
-                }
-
-                //Garante que existe, é string e não está vazia após o "trim"
-                if(!data.title || typeof data.title !== 'string' || !data.title.trim()){// Validação do campo obrigatório "title"
-                    res.writeHead(400, {'Content-type': 'application/json'});
-                    return res.end(JSON.stringify({message: 'O campo title é obrigatório e deve ser uma string'}));
-                }
-
-                const newQuest = {//Criação do objeto quest com as chaves do modelo de negócio
-                    id: ++questId ,
-                    title: data.title.trim(),
-                    description: typeof data.description === 'string' ? data.description.trim() : '',
-                    xp: data.xp ? Number(data.xp) : 0,
-                    difficulty: data.difficulty || 'easy',
-                    completed: typeof data.completed === 'boolean' ? data.completed : false //default falso
-                }
-                //Adicionando no fim do array de armazenamento a nova quest
-                quests.push(newQuest);
-
-                res.writeHead(201, {'Content-type': 'application/json'});
-                res.end(JSON.stringify(newQuest));
-
-            }catch(error){//Em caso de erro 
-                
-                res.writeHead(400, {'Content-type': 'application/json'});
-                res.end(JSON.stringify({error: 'Requisição inválida'}));
-
-            }
-        })
-
-
-    }
-    else if(req.method === 'PUT' && url.pathname === '/quests'){
-        
-        //Quarda o ID recebido no parâmetro
-        const idParam = url.searchParams.get('id');
-
-        if(idParam == null){//Verifica se foi passado algum parâmetro
-            res.writeHead(400,{'Content-type': 'application/json'});
-            return res.end(JSON.stringify({message: 'ID não informado'}));
-        }
-        //Passando o ID para inteiro
-        const ID = parseInt(idParam);
-
-        if(isNaN(ID)){//Verifica se o parâmetro é um número
-            res.writeHead(400,{'Content-type': 'application/json'});
-            return res.end(JSON.stringify({message: 'ID inválido'}));
-        }
-
-        //Pega a posição do array
-        const index = quests.findIndex((quest) => quest.id === ID);
-
-        if(index === -1){//Verifica se o id passado existe no array
-            res.writeHead(404,{'Content-type': 'application/json'});
-            return res.end(JSON.stringify({message: 'Quest não encontrada'}));
-        }
-
-        let body = '';
-
-        req.on('data', (chunk)=>{
-            body += chunk;
-        });
-
-        
-        req.on('end', ()=>{
-            try{
-
-                if(!body.trim()){//Breve validação de corpo vazio antes do parse
-                    res.writeHead(400,{'Content-type': 'application/json'});
-                    return res.end(JSON.stringify({message: 'Requisição vazia'}));
-                }
-
-                //Armazena o body em formato JSON
-                const data = JSON.parse(body);
-
-                //Aqui pode ter uma sanitização dos dados para validação do conteúdo
-
-                //Sobreescreve o objeto, mantendo o que não foi alterado e no final forçando o ID original
-                quests[index] = {
-                    ...quests[index],
-                    ...data,
-                    id: quests[index].id
-                }
-
-                res.writeHead(200,{'Content-type': 'application/json'});
-                res.end(JSON.stringify(quests[index]));
-                
-            }
-            catch(error){
-            
-                res.writeHead(400,{'Content-type': 'application/json'});
-                res.end(JSON.stringify({error: 'Requisição inválida'}));
-
-            }
-
-        
-        })
-        
-    }
-    
-    else if(req.method === 'PUT' && url.pathname === '/quests/complete'){
-
-        const idParam = url.searchParams.get('id');
-
-        if(idParam == null){//Verifica se foi passado algum parâmetro
-            res.writeHead(400,{'Content-type': 'application/json'});
-            return res.end(JSON.stringify({message: 'ID não informado'}));
-        }
-
-        const ID = parseInt(idParam);
-
-        if(isNaN(ID)){//Verifica se o parâmetro é um número
-            res.writeHead(400,{'Content-type': 'application/json'});
-            return res.end(JSON.stringify({message: 'ID inválido'}));
-        }
-
-        //Pega a posição do array
-        const index = quests.findIndex((quest) => quest.id === ID);
-
-        if(index === -1){//Verifica se o id passado existe no array
-            res.writeHead(404,{'Content-type': 'application/json'});
-            return res.end(JSON.stringify({message: 'Quest não encontrada'}));
-        }
-
-        if(quests[index].completed){
-            res.writeHead(400,{'Content-type': 'application/json'});
-            return res.end(JSON.stringify({message: 'Quest já completada'}));
-        }
-
-        //Altera a quest para completado
-        quests[index].completed = true;
-
-        res.writeHead(200,{'Content-type': 'application/json'});
-        res.end(JSON.stringify(quests[index]));
-    }
-
-    //Tratamento de rota não encontrada
-    else {
-        res.writeHead(404, {'Content-type': 'application/json'});
-        res.end(JSON.stringify({message: 'Not Found'}));
-    }
-
+//Rota de Ping
+app.get('/ping', (req,res)=>{
+    res.status(200).json({status: 'OK'});
 });
 
-server.listen(PORT, ()=>{
+//Rota de listagem de Quests
+app.get('/quests', (req,res)=>{
+    return res.status(200).json(quests);
+});
+
+//Rota de listagem por id
+app.get('/quests/:id', (req,res)=>{
+    //Quarda o id recebido e lê apenas na base 10
+    const id = parseInt(req.params.id, 10);
+
+    if(isNaN(id)){// Verifica se é um ID válido
+        return res.status(400).json({message: 'ID inválido'});
+    }
+
+    const index = quests.findIndex((quest) => quest.id === id);
+
+    if(index === -1){//Verifica se existe no array
+        return res.status(404).json({message: 'Quest não encontrada'});
+    }
+
+    //Retorna a quest
+    return res.status(200).json(quests.find((quest) => quest.id === id));
+
+})
+
+app.post('/quests', (req,res)=>{
+    //Quarda as informações do body
+    const data = req.body;
+
+    //Verifica se p título foi preeenchido e é uma string
+    if(!data.title || typeof data.title !== 'string'){
+        return res.status(400).json({message: 'O campo title é obrigatório e deve ser uma string'});
+    }
+
+    //Cria uma nova quest com as propriedades preenchidas ou não (exceto o id)
+    const newQuest = {
+        id: ++questId,
+        title: data.title.trim(),
+        description: typeof data.description === 'string' ? data.description.trim() : '',
+        xp: data.xp ? Number(data.xp) : 0,
+        difficulty: data.difficulty || 'easy',
+        completed: typeof data.completed === 'boolean' ? data.completed : false
+    }
+
+    //Adiciona a nova quest no fim do array
+    quests.push(newQuest);
+
+    return res.status(201).json(newQuest);
+})
+
+app.put('/quests/:id', (req,res)=>{
+
+    const id = parseInt(req.params.id, 10);
+    
+    //Quarda o corpo da requisição
+    const data = req.body;
+
+    //Quarda a posição da quest 
+    const index = quests.findIndex((quest) => quest.id === id);
+
+    if(index === -1){//Verifica se existe no array
+        return res.status(404).json({message: 'Quest não encontrada'});
+    }
+
+    //Sobreescreve e força o id original
+    quests[index] = {
+        ...quests[index],
+        ...data,
+        id: quests[index].id
+    };
+
+    return res.status(200).json(quests[index]);
+})
+
+app.put('/quests/:id/complete', (req,res)=>{
+    const id = parseInt(req.params.id, 10);
+
+    const index = quests.findIndex((quest) => quest.id === id);
+
+    if(index === -1){//Verifica se existe no array
+        return res.status(404).json({message: 'Quest não encontrada'});
+    }
+
+    if(quests[index].completed){//Verifica se está completa
+        return res.status(400).json({message: 'Quest já completada'});
+    }
+
+    //Altera a quest para completada
+    quests[index].completed = true;
+
+    return res.status(200).json(quests[index]);
+})
+
+//Inicializando o servidor
+app.listen(PORT, ()=>{
     console.log(`Servidor rodando em http://localhost:${PORT}`);
 })
+
+export default app;

@@ -56,5 +56,14 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 
 ---
 
+## 📂 Histórico e Evolução do Projeto
+
+Para fins de aprendizado e documentação, o histórico de desenvolvimento foi preservado. Antes de utilizar o Express, esta API foi escrita inteiramente utilizando apenas os módulos nativos do Node.js. 
+
+Você pode conferir a arquitetura original, incluindo os tratamentos manuais de streams e validações de rotas, acessando a pasta [📂 legacy/](./legacy).
+
+
+---
+
 ## 🔧 Como Executar o Projeto (Futuro)
 *Instruções de instalação e execução serão adicionadas nas próximas sprints.*
