@@ -1,0 +1,28 @@
+{
+  "name": "quest-hub-api",
+  "version": "0.1.0",
+  "description": "API para gerenciamento de quests e gamificação",
+  "homepage": "https://github.com/FireFox1312/quest-hub-API#readme",
+  "bugs": {
+    "url": "https://github.com/FireFox1312/quest-hub-API/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FireFox1312/quest-hub-API.git"
+  },
+  "license": "ISC",
+  "author": "Carlos Eduardo Purkott",
+  "type": "module",
+  "main": "src/server.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
