@@ -17,6 +17,7 @@ Content-Type: application/json
 
 ### Testar o PUT
 PUT http://localhost:3000/quests?id=2
+Content-Type: application/json
 
 {
   "title": "Put testado",

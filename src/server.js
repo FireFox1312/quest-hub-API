@@ -203,6 +203,10 @@ const server = http.createServer((req,res)=>{
             return res.end(JSON.stringify({message: 'Quest não encontrada'}));
         }
 
+        if(quests[index].completed){
+            res.writeHead(400,{'Content-type': 'application/json'});
+            return res.end(JSON.stringify({message: 'Quest já completada'}));
+        }
 
         //Altera a quest para completado
         quests[index].completed = true;
