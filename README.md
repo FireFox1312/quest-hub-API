@@ -15,13 +15,13 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 
 ---
 
-## 🚀 Status Atual: `Sprint 0` — Preparação do Ambiente
-> ⚙️ **Foco da Sprint**: Configuração inicial do ambiente de desenvolvimento, repositório e Git.
-
-- [x] Inicialização do repositório e Gitignore
-- [x] Estruturação inicial do projeto
-- [x] Configuração de ferramentas de qualidade (ESLint/Prettier)
-- [x] Primeiro commit e push para o repositório remoto
+## 🚀 Status Atual: `Sprint 2` — Arquitetura da API
+> ⚙️ **Foco da Sprint**: Migração para Express e organização do código em camadas de responsabilidade única (Router, Controller, Service, Repository).
+- [ ] Migração do servidor HTTP nativo para o Express (em arquivo único)
+- [ ] Criação do repositório isolado de dados em memória (`quest.repository.js`)
+- [ ] Criação da camada de serviços para regras de negócio (`quest.service.js`)
+- [ ] Criação da camada de controle de requisição/resposta (`quest.controller.js`)
+- [ ] Isolamento de rotas com o Express Router (`quest.routes.js`)
 
 ---
 
@@ -29,9 +29,9 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 
 | Status | Sprint | Descrição |
 | :---: | :---: | :--- |
-| 🟨 | **Sprint 0** | Preparação de ambiente, repositório e estrutura inicial |
-| ⬜ | **Sprint 1** | Fundamentos HTTP: Primeiros endpoints em memória (`/quests`) |
-| ⬜ | **Sprint 2** | Refatoração em camadas (Router, Controller, Service, Repository) |
+| ✅ | **Sprint 0** | Preparação de ambiente, repositório e estrutura inicial |
+| ✅ | **Sprint 1** | Fundamentos HTTP em ESModules: Primeiros endpoints em memória (`/quests` e `quests/complete`) |
+| 🟨 | **Sprint 2** | Refatoração em camadas e migração para Express(Router, Controller, Service, Repository(por enquanto em memória)) |
 | ⬜ | **Sprint 3** | CRUD Completo + filtros, paginação e ordenação |
 | ⬜ | **Sprint 4** | Validação de dados com Zod |
 | ⬜ | **Sprint 5** | Sistema padronizado de tratamento de erros |
@@ -49,7 +49,7 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 
 ## 🛠️ Tecnologias Utilizadas
 * **Runtime**: Node.js
-* **Framework**: Express (a partir da Sprint 1)
+* **Framework**: Express (a partir da Sprint 2)
 * **Banco de Dados**: PostgreSQL (a partir da Sprint 6)
 * **ORM**: Prisma (a partir da Sprint 6)
 * **Validação**: Zod (a partir da Sprint 4)
