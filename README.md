@@ -31,17 +31,18 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 | :---: | :---: | :--- |
 | ✅ | **Sprint 0** | Preparação de ambiente, repositório e estrutura inicial |
 | ✅ | **Sprint 1** | Fundamentos HTTP em ESModules: Primeiros endpoints em memória (`/quests` e `quests/complete`) |
-| 🟨 | **Sprint 2** | Refatoração em camadas e migração para Express(Router, Controller, Service, Repository(por enquanto em memória)) |
-| ⬜ | **Sprint 3** | CRUD Completo + filtros, paginação e ordenação |
-| ⬜ | **Sprint 4** | Validação de dados com Zod |
-| ⬜ | **Sprint 5** | Sistema padronizado de tratamento de erros |
-| ⬜ | **Sprint 6** | Banco de Dados: Integração com PostgreSQL & Prisma |
-| ⬜ | **Sprint 7** | Autenticação e Autorização com JWT |
-| ⬜ | **Sprint 8** | Segurança avançada (CORS, Helmet, Rate Limit) |
-| ⬜ | **Sprint 9** | Middlewares de log e monitoramento de performance |
-| ⬜ | **Sprint 10** | Documentação interativa com Swagger/OpenAPI |
-| ⬜ | **Sprint 11** | Testes Unitários e de Integração |
-| ⬜ | **Sprint 12** | Observabilidade estruturada e Health Check |
+| ✅ | **Sprint 2** | Refatoração em camadas e migração para Express (Router, Controller, Service, Repository em memória) |
+| ⬜ | **Sprint 3** | CRUD Completo, Paginação, Filtros e Middlewares Manuais (Logger e NotFound) |
+| ⬜ | **Sprint 4** | Validação de dados com Zod, Middleware de Validação e CORS básico |
+| ⬜ | **Sprint 5** | Sistema padronizado de Tratamento de Erros (AppError) e Helmet |
+| ⬜ | **Sprint 6** | Persistência Local: Migração para JSON e Desafio SQLite nativo |
+| ⬜ | **Sprint 7** | Banco de Dados Profissional: Integração com PostgreSQL & Prisma ORM |
+| ⬜ | **Sprint 8** | Autenticação e Autorização com JWT |
+| ⬜ | **Sprint 9** | Segurança avançada e Rate Limit |
+| ⬜ | **Sprint 10** | Middlewares avançados de log e monitoramento de performance |
+| ⬜ | **Sprint 11** | Documentação interativa com Swagger/OpenAPI |
+| ⬜ | **Sprint 12** | Testes Unitários e de Integração |
+| ⬜ | **Sprint 13** | Observabilidade estruturada e Health Check |
 
 *(Legenda: ⬜ Não Iniciado | 🟨 Em Andamento | ✅ Concluído)*
 
@@ -50,9 +51,9 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 ## 🛠️ Tecnologias Utilizadas
 * **Runtime**: Node.js
 * **Framework**: Express (a partir da Sprint 2)
-* **Banco de Dados**: PostgreSQL (a partir da Sprint 6)
-* **ORM**: Prisma (a partir da Sprint 6)
 * **Validação**: Zod (a partir da Sprint 4)
+* **Bancos de Dados Iniciais**: JSON e SQLite (a partir da Sprint 6)
+* **Bancos de Dados Profissionais**: PostgreSQL e Prisma ORM (a partir da Sprint 7)
 
 ---
 
