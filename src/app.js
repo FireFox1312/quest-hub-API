@@ -3,8 +3,6 @@ import express from 'express';
 //Objeto que vai conter todos o métodos do express
 const app = express();
 
-const PORT = 3000;
-
 //Fará o parse dos dados para JSON
 app.use(express.json());
 
@@ -46,7 +44,7 @@ app.post('/quests', (req,res)=>{
     //Quarda as informações do body
     const data = req.body;
 
-    //Verifica se p título foi preeenchido e é uma string
+    //Verifica se o título foi preeenchido e é uma string
     if(!data.title || typeof data.title !== 'string'){
         return res.status(400).json({message: 'O campo title é obrigatório e deve ser uma string'});
     }
