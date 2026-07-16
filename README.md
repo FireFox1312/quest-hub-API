@@ -17,11 +17,11 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 
 ## 🚀 Status Atual: `Sprint 2` — Arquitetura da API
 > ⚙️ **Foco da Sprint**: Migração para Express e organização do código em camadas de responsabilidade única (Router, Controller, Service, Repository).
-- [ ] Migração do servidor HTTP nativo para o Express (em arquivo único)
-- [ ] Criação do repositório isolado de dados em memória (`quest.repository.js`)
-- [ ] Criação da camada de serviços para regras de negócio (`quest.service.js`)
-- [ ] Criação da camada de controle de requisição/resposta (`quest.controller.js`)
-- [ ] Isolamento de rotas com o Express Router (`quest.routes.js`)
+- [X] Migração do servidor HTTP nativo para o Express (em arquivo único)
+- [X] Criação do repositório isolado de dados em memória (`quest.repository.js`)
+- [X] Criação da camada de serviços para regras de negócio (`quest.service.js`)
+- [X] Criação da camada de controle de requisição/resposta (`quest.controller.js`)
+- [X] Isolamento de rotas com o Express Router (`quest.routes.js`)
 
 ---
 
