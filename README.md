@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Node.js-v24.18.0-green?style=for-the-badge&logo=node.js" alt="Node.js Version" />
-  <img src="https://img.shields.io/badge/Sprint%20Atual-Sprint%202-blue?style=for-the-badge&logo=git" alt="Sprint 2" />
+  <img src="https://img.shields.io/badge/Sprint%20Atual-Sprint%203-blue?style=for-the-badge&logo=git" alt="Sprint 3" />
   <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License" />
 </p>
 
@@ -15,13 +15,13 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 
 ---
 
-## 🚀 Status Atual: `Sprint 2` — Arquitetura da API
-> ⚙️ **Foco da Sprint**: Migração para Express e organização do código em camadas de responsabilidade única (Router, Controller, Service, Repository).
-- [X] Migração do servidor HTTP nativo para o Express (em arquivo único)
-- [X] Criação do repositório isolado de dados em memória (`quest.repository.js`)
-- [X] Criação da camada de serviços para regras de negócio (`quest.service.js`)
-- [X] Criação da camada de controle de requisição/resposta (`quest.controller.js`)
-- [X] Isolamento de rotas com o Express Router (`quest.routes.js`)
+## 🚀 Status Atual: `Sprint 3` — CRUD, Paginação e Middlewares Básicos
+> ⚙️ **Foco da Sprint**: Expandir as funcionalidades da API com paginação, filtros e introduzir o conceito de Middlewares manuais para interceptar requisições.
+- [ ] Implementação de exclusão (DELETE `/quests/:id`)
+- [ ] Implementação de paginação manual (Query Params: `page` e `limit`)
+- [ ] Implementação de filtros (Ex: listar apenas completadas ou ordenar por XP)
+- [ ] Criação de Middleware global de Logger (Registro de requisições no console)
+- [ ] Criação de Middleware de Fallback para rotas inexistentes (404 Not Found)
 
 ---
 
