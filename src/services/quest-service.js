@@ -13,12 +13,11 @@ export class QuestService {
         //Busca pelo id e guarda a quest
         const quest = this.questRepository.findById(id);
 
-        if (quest === undefined) {//Verificação de existência da quest
-            throw new Error('Quest não encontrada');
-        }
-        else{//Se existe retorna ela
+        //Verifica se existe, se não existe lança um erro
+        if(!quest) throw new Error('Quest não encontrada');
+        
         return quest;
-        }
+
     }
 
     //Cria uma quest com as informações do body "data"

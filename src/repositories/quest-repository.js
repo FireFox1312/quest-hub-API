@@ -20,8 +20,31 @@ export class QuestRepository{
             objQuest = objQuest.filter((quest) => quest.completed === filters.completed);
         }
 
-        //Retorna null se não houver quests, caso contrário retorna o array de quests
-        return objQuest.length > 0 ? objQuest : null ;
+        if(objQuest.length === 0){
+            return null;
+        }
+
+        //---- Paginação ----
+
+        const page = filters.page;
+        const limit = filters.limit;
+
+        const startIndex = (page - 1) * limit;
+        const totalItens = objQuest.length;
+
+        objQuest = objQuest.slice(startIndex, startIndex + limit);
+
+        const response = {
+            data: objQuest,
+            meta: {
+                totalItens: totalItens,
+                currentPage: page,
+                totalPages: Math.ceil(totalItens / limit),
+                limit: limit
+            }
+        }
+
+        return response;
     }
     
     findById(id) {//Método para retornar uma quest pelo id, exceto se ela foi deletada

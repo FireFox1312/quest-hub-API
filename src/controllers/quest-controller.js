@@ -13,6 +13,14 @@ export class QuestController{
     getControll = (req, res) => {
         //Guarda os filtros passados na URL
         const filters = req.query;
+
+        const page = req.query.page ? parseInt(req.query.page, 10) : 1;
+
+        const limit = req.query.limit ? parseInt(req.query.limit, 10) : 10;
+
+        filters.page = page;
+        filters.limit = limit;
+
         //Guarda a lista retornada pelo service
         const questList = this.questService.getAll(filters);
         res.status(200).json(questList);
