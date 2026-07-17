@@ -11,7 +11,18 @@ export class QuestController{
 
     //Chama o service pra retornar a lista
     getControll = (req, res) => {
-        const questList = this.questService.getAll();
+        //Guarda os filtros passados na URL
+        const filters = req.query;
+
+        const page = req.query.page ? parseInt(req.query.page, 10) : 1;
+
+        const limit = req.query.limit ? parseInt(req.query.limit, 10) : 10;
+
+        filters.page = page;
+        filters.limit = limit;
+
+        //Guarda a lista retornada pelo service
+        const questList = this.questService.getAll(filters);
         res.status(200).json(questList);
     }
 
@@ -74,6 +85,20 @@ export class QuestController{
         }
         catch(error){//Caso não exista a quest, retorna o erro lancado pelo service
             res.status(400).json({message: error.message});
+        }
+    }
+
+    deleteControll = (req, res) => {
+        //Pega o id da requisição e transforma em número
+        const id = parseInt(req.params.id, 10);
+
+        try{
+            const deletedQuest = this.questService.delete(id);
+            
+            res.status(204).send();
+        }
+        catch(error){
+            res.status(404).json({message: error.message});
         }
     }
 }

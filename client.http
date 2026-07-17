@@ -22,8 +22,20 @@ Content-Type: application/json
 {
   "title": "Put testado",
   "description": "Esse é um teste de API com o método PUT",
-  "difficulty": "GG Ezz"
+  "difficulty": "GG easy"
 }
 
-### Testando endpoint /quests/:id/complete
+### Testar o endpoint /quests/:id/complete
 PUT  http://localhost:3000/quests/2/complete
+
+### Testar o DELETE
+DELETE http://localhost:3000/quests/1
+
+### Testar o filtro no GET
+GET http://localhost:3000/quests?difficulty=easy
+
+### Testar a paginação do GET
+GET http://localhost:3000/quests?page=1&limit=3
+
+### Testar paginação e filtro "completed" no GET
+GET http://localhost:3000/quests?completed=true&page=1&limit=3

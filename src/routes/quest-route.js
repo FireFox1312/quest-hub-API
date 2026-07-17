@@ -16,5 +16,6 @@ router.get('/:id', questController.searchControll);
 router.post('/', questController.postControll);
 router.put('/:id', questController.putControll);
 router.put('/:id/complete', questController.completeControll);
+router.delete('/:id', questController.deleteControll);
 
 export default router;
