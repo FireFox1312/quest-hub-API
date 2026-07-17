@@ -86,6 +86,7 @@ export class QuestController{
 
         try{
             const deletedQuest = this.questService.delete(id);
+            
             res.status(204).send();
         }
         catch(error){

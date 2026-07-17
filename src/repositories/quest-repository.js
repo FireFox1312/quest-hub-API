@@ -28,7 +28,7 @@ export class QuestRepository{
         //Busca a quest pelo id
         const objQuest = this.quests.find((quest) => quest.id === id);
 
-        //Verifica se existe, já retorna null
+        //Verifica se existe, se não existe já retorna null
         if(!objQuest) return null;
 
         //Retorna a quest se ela não for deletada, caso contrário retorna null
