@@ -53,4 +53,18 @@ export class QuestService {
         return this.questRepository.update(quest.id, {completed: true});
     }
 
+    delete(id){
+        //Busca a quest pelo id
+        const quest = this.getById(id);
+
+        //Verifica se já foi deletada, caso sim retorna null, caso não chama o repository para deletar
+        if (quest.deleteAt !== null ){
+            throw  new Error('Quest já deletada');
+        }
+        else{
+            return this.questRepository.delete(quest.id);
+        }
+        return quest;
+    }
+
 }

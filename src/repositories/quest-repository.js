@@ -5,12 +5,21 @@ export class QuestRepository{
         this.questId = 0;
     }
     
-    findAll() {//Método para retornar todas as quests
-        return this.quests;
+    findAll() {//Método para retornar todas as quests que estejam ativas (deleteAt === null)
+
+        //Filtra as quests que não foram deletadas
+        const objQuest = this.quests.filter((quest) => quest.deleteAt === null);
+
+        //Retorna null se não houver quests, caso contrário retorna o array de quests
+        return objQuest.length > 0 ? objQuest : null ;
     }
     
-    findById(id) {//Método para retornar uma quest pelo id
-        return this.quests.find((quest) => quest.id === id);
+    findById(id) {//Método para retornar uma quest pelo id, exceto se ela foi deletada
+        //Busca a quest pelo id
+        const objQuest = this.quests.find((quest) => quest.id === id);
+
+        //Retorna a quest se ela não for deletada, caso contrário retorna nullo
+        return objQuest.deleteAt === null ? objQuest : null;
     }
 
     create(data) {//Método para criar uma nova quest
@@ -20,7 +29,8 @@ export class QuestRepository{
             description: typeof data.description === 'string' ? data.description.trim() : '',
             xp: data.xp ? Number(data.xp) : 0,
             difficulty: data.difficulty || 'easy',
-            completed: typeof data.completed === 'boolean' ? data.completed : false
+            completed: typeof data.completed === 'boolean' ? data.completed : false,
+            deleteAt: null
         }
 
         //Adiciona a nova quest no fim do array
@@ -45,4 +55,18 @@ export class QuestRepository{
 
         return this.quests[index];
     }
+
+    delete(id) {//Método para deletar uma quest
+
+        //Busca a quest pelo id
+        const objQuest = this.findById(id);
+
+        if(objQuest === null){//Verifica se existe no array
+            return null;
+        }
+        else{//Se existe, chama o método update para alterar a propriedade deleteAt para a data atual
+            return this.update(id, {deleteAt: new Date().toISOString()});
+        }
+    }
+
 }
