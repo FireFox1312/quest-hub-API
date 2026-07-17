@@ -4,8 +4,8 @@ export class QuestService {
         this.questRepository = questRepository;
     }
     //Retorna todas as quests
-    getAll() {
-        return this.questRepository.findAll();
+    getAll(filters) {
+        return this.questRepository.findAll(filters);
     }
 
     //Retorna a quest pelo id

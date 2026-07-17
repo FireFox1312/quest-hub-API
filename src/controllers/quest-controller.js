@@ -11,7 +11,10 @@ export class QuestController{
 
     //Chama o service pra retornar a lista
     getControll = (req, res) => {
-        const questList = this.questService.getAll();
+        //Guarda os filtros passados na URL
+        const filters = req.query;
+        //Guarda a lista retornada pelo service
+        const questList = this.questService.getAll(filters);
         res.status(200).json(questList);
     }
 

@@ -5,10 +5,20 @@ export class QuestRepository{
         this.questId = 0;
     }
     
-    findAll() {//Método para retornar todas as quests que estejam ativas (deleteAt === null)
+    findAll(filters) {//Método para retornar todas as quests que estejam ativas e aplica filtros, se ouver.
 
         //Filtra as quests que não foram deletadas
-        const objQuest = this.quests.filter((quest) => quest.deleteAt === null);
+        let objQuest = this.quests.filter((quest) => quest.deleteAt === null);
+
+        if(filters.difficulty){
+            objQuest = objQuest.filter((quest) => quest.difficulty === filters.difficulty);
+        }
+
+        if(filters.completed){
+            //Altera para verdadeiro (boleano) caso as string no query params for "true"
+            filters.completed = filters.completed === 'true';
+            objQuest = objQuest.filter((quest) => quest.completed === filters.completed);
+        }
 
         //Retorna null se não houver quests, caso contrário retorna o array de quests
         return objQuest.length > 0 ? objQuest : null ;
@@ -18,7 +28,10 @@ export class QuestRepository{
         //Busca a quest pelo id
         const objQuest = this.quests.find((quest) => quest.id === id);
 
-        //Retorna a quest se ela não for deletada, caso contrário retorna nullo
+        //Verifica se existe, já retorna null
+        if(!objQuest) return null;
+
+        //Retorna a quest se ela não for deletada, caso contrário retorna null
         return objQuest.deleteAt === null ? objQuest : null;
     }
 
