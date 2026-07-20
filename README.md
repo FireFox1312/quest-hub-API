@@ -17,11 +17,11 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 
 ## 🚀 Status Atual: `Sprint 3` — CRUD, Paginação e Middlewares Básicos
 > ⚙️ **Foco da Sprint**: Expandir as funcionalidades da API com paginação, filtros e introduzir o conceito de Middlewares manuais para interceptar requisições.
-- [ ] Implementação de exclusão (DELETE `/quests/:id`)
-- [ ] Implementação de paginação manual (Query Params: `page` e `limit`)
-- [ ] Implementação de filtros (Ex: listar apenas completadas ou ordenar por XP)
-- [ ] Criação de Middleware global de Logger (Registro de requisições no console)
-- [ ] Criação de Middleware de Fallback para rotas inexistentes (404 Not Found)
+- [X] Implementação de exclusão (DELETE `/quests/:id`)
+- [X] Implementação de paginação manual (Query Params: `page` e `limit`)
+- [X] Implementação de filtros (Ex: listar apenas completadas ou ordenar por XP)
+- [X] Criação de Middleware global de Logger (Registro de requisições no console)
+- [X] Criação de Middleware de Fallback para rotas inexistentes (404 Not Found)
 
 ---
 
@@ -32,7 +32,7 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 | ✅ | **Sprint 0** | Preparação de ambiente, repositório e estrutura inicial |
 | ✅ | **Sprint 1** | Fundamentos HTTP em ESModules: Primeiros endpoints em memória (`/quests` e `quests/complete`) |
 | ✅ | **Sprint 2** | Refatoração em camadas e migração para Express (Router, Controller, Service, Repository em memória) |
-| ⬜ | **Sprint 3** | CRUD Completo, Paginação, Filtros e Middlewares Manuais (Logger e NotFound) |
+| ✅ | **Sprint 3** | CRUD Completo, Paginação, Filtros e Middlewares Manuais (Logger e NotFound) |
 | ⬜ | **Sprint 4** | Validação de dados com Zod, Middleware de Validação e CORS básico |
 | ⬜ | **Sprint 5** | Sistema padronizado de Tratamento de Erros (AppError) e Helmet |
 | ⬜ | **Sprint 6** | Persistência Local: Migração para JSON e Desafio SQLite nativo |
