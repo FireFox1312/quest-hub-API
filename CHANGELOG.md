@@ -49,7 +49,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ---
 
-# 📄 Changelog
+# 📄 Nota
 
 Todas as alterações notáveis neste projeto serão documentadas neste arquivo.
 
