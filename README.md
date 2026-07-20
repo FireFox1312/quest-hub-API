@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Node.js-v24.18.0-green?style=for-the-badge&logo=node.js" alt="Node.js Version" />
-  <img src="https://img.shields.io/badge/Sprint%20Atual-Sprint%203-blue?style=for-the-badge&logo=git" alt="Sprint 3" />
+  <img src="https://img.shields.io/badge/Sprint%20Atual-Sprint%203-blue?style=for-the-badge&logo=git" alt="Sprint 4" />
   <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License" />
 </p>
 
@@ -32,8 +32,8 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 | ✅ | **Sprint 0** | Preparação de ambiente, repositório e estrutura inicial |
 | ✅ | **Sprint 1** | Fundamentos HTTP em ESModules: Primeiros endpoints em memória (`/quests` e `quests/complete`) |
 | ✅ | **Sprint 2** | Refatoração em camadas e migração para Express (Router, Controller, Service, Repository em memória) |
-| ✅ | **Sprint 3** | CRUD Completo, Paginação, Filtros e Middlewares Manuais (Logger e NotFound) |
-| ⬜ | **Sprint 4** | Validação de dados com Zod, Middleware de Validação e CORS básico |
+| ✅ | **Sprint 3** | CRUD Completo (com Soft Delete), Paginação, Filtros e Middlewares Manuais (Logger e NotFound) |
+| 🟨 | **Sprint 4** | Validação de dados com Zod, Middleware de Validação e CORS básico |
 | ⬜ | **Sprint 5** | Sistema padronizado de Tratamento de Erros (AppError) e Helmet |
 | ⬜ | **Sprint 6** | Persistência Local: Migração para JSON e Desafio SQLite nativo |
 | ⬜ | **Sprint 7** | Banco de Dados Profissional: Integração com PostgreSQL & Prisma ORM |
