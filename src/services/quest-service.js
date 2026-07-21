@@ -22,11 +22,6 @@ export class QuestService {
 
     //Cria uma quest com as informações do body "data"
     create(data) {
-        //Verifica se o título foi preenchido e é uma string
-        if (!data.title || typeof data.title !== 'string') {
-            throw new Error('O campo title é obrigatório e deve ser uma string');
-        }
-        
         //Retorna a quest criada
         return this.questRepository.create(data);
     }

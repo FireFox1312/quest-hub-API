@@ -3,6 +3,9 @@ import express from 'express';
 import { QuestRepository } from '../repositories/quest-repository.js';
 import { QuestService } from '../services/quest-service.js';
 import { QuestController } from '../controllers/quest-controller.js';
+import { validate } from '../middlewares/validation.js';
+import { questSchema, updateQuestSchema } from '../schemas/quest-schema.js';
+
 
 //Injeção de dependência, criando instâncias das classes e passando elas para o construtor da próxima classe
 const questRepository = new QuestRepository();
@@ -13,8 +16,8 @@ const router = express.Router();
 
 router.get('/', questController.getControll);
 router.get('/:id', questController.searchControll);
-router.post('/', questController.postControll);
-router.put('/:id', questController.putControll);
+router.post('/', validate(questSchema), questController.postControll);
+router.put('/:id', validate(updateQuestSchema), questController.putControll);
 router.put('/:id/complete', questController.completeControll);
 router.delete('/:id', questController.deleteControll);
 
