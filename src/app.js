@@ -3,6 +3,8 @@ import express from 'express';
 import questRoute from './routes/quest-route.js';
 import { logger } from './middlewares/logger.js';
 import { notFound } from './middlewares/notFound.js';
+import cors from 'cors';
+import { corsOptions } from './config/cors.js';
 
 //Objeto que vai conter todos o métodos do express
 const app = express();
@@ -12,6 +14,9 @@ app.use(express.json());
 
 //Utiliza o logger toda vez antes da requisição passar pela rota
 app.use(logger);
+
+//Utiliza o middleware antes das rotas
+app.use(cors(corsOptions));
 
 //Rota para o endpoint /quests, que vai usar o router definido no arquivo quest-route.js
 app.use('/quests', questRoute);
