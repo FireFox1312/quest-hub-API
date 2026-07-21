@@ -63,8 +63,9 @@ export class QuestRepository{
             id: ++this.questId,
             title: data.title.trim(),
             description: typeof data.description === 'string' ? data.description.trim() : '',
+            category: data.category,
             xp: data.xp ? Number(data.xp) : 0,
-            difficulty: data.difficulty || 'easy',
+            difficulty: data.difficulty,
             completed: typeof data.completed === 'boolean' ? data.completed : false,
             deleteAt: null
         }

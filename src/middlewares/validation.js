@@ -1,11 +1,12 @@
 //Exporta uma função que receberá o schema e retornará o middleware
-export const validate = (schema) => {
+export const validate = (schema, property = 'body') => {
 
     return (req, res, next) => {
 
-        try{
-            //Tenta fazer o parse do corpo da requsição
-            schema.parse(req.body);
+        try{//Tenta fazer o parse do corpo da requsição
+            
+            //Acessa dinamicamente a propriedade do req e faz o parse com o schema
+            schema.parse(req[property]);
             //Se não der erro vai para o próximo middleware
             next();
         }

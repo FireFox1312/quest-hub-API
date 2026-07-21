@@ -9,10 +9,11 @@ POST http://localhost:3000/quests
 Content-Type: application/json
 
 {
-  "title":"Minha Nova Quest",
+  "title":"Método POST",
+  "category":"estudo",
   "description":"Esse é um teste de API no método POST",
   "xp":100,
-  "difficulty":"Meio dificil"
+  "difficulty": "medium"
 }
 
 ### Testar o PUT
@@ -22,7 +23,7 @@ Content-Type: application/json
 {
   "title": "Put testado",
   "description": "Esse é um teste de API com o método PUT",
-  "difficulty": "GG easy"
+  "difficulty": "easy"
 }
 
 ### Testar o endpoint /quests/:id/complete
