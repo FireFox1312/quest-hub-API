@@ -3,8 +3,6 @@ import express from 'express';
 import questRoute from './routes/quest-route.js';
 import { logger } from './middlewares/logger.js';
 import { notFound } from './middlewares/notFound.js';
-import cors from 'cors';
-import { corsOptions } from './config/cors.js';
 
 //Objeto que vai conter todos o métodos do express
 const app = express();
