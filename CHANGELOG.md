@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.1](https://github.com/FireFox1312/quest-hub-API/compare/v0.3.0...v0.3.1) (2026-07-22)
+
+
+### Features
+
+* add strict mode and refine schemas ([927a860](https://github.com/FireFox1312/quest-hub-API/commit/927a8607dd555771dc7d0be3592cf337bb89d7bf))
+* create quest validation schemas ([acca645](https://github.com/FireFox1312/quest-hub-API/commit/acca6457403521c0708e92949476f4baee9bd50f))
+* created generic validation middleware ([de37f81](https://github.com/FireFox1312/quest-hub-API/commit/de37f81b1a7ca6e2db24f793999da656e265294f))
+
 ## [0.3.0](https://github.com/FireFox1312/quest-hub-API/compare/v0.2.0...v0.3.0) (2026-07-20)
 
 
