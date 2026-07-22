@@ -13,6 +13,9 @@ app.use(express.json());
 //Utiliza o logger toda vez antes da requisição passar pela rota
 app.use(logger);
 
+//Utiliza o middleware antes das rotas
+app.use(cors(corsOptions));
+
 //Rota para o endpoint /quests, que vai usar o router definido no arquivo quest-route.js
 app.use('/quests', questRoute);
 
