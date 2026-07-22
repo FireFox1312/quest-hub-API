@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Node.js-v24.18.0-green?style=for-the-badge&logo=node.js" alt="Node.js Version" />
-  <img src="https://img.shields.io/badge/Sprint%20Atual-Sprint%203-blue?style=for-the-badge&logo=git" alt="Sprint 3" />
+  <img src="https://img.shields.io/badge/Sprint%20Atual-Sprint%204-blue?style=for-the-badge&logo=git" alt="Sprint 4" />
   <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License" />
 </p>
 
@@ -15,13 +15,13 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 
 ---
 
-## 🚀 Status Atual: `Sprint 3` — CRUD, Paginação e Middlewares Básicos
-> ⚙️ **Foco da Sprint**: Expandir as funcionalidades da API com paginação, filtros e introduzir o conceito de Middlewares manuais para interceptar requisições.
-- [X] Implementação de exclusão (DELETE `/quests/:id`)
-- [X] Implementação de paginação manual (Query Params: `page` e `limit`)
-- [X] Implementação de filtros (Ex: listar apenas completadas ou ordenar por XP)
-- [X] Criação de Middleware global de Logger (Registro de requisições no console)
-- [X] Criação de Middleware de Fallback para rotas inexistentes (404 Not Found)
+## 🚀 Status Atual: `Sprint 4` — Validação de Dados (Zod) e CORS
+> ⚙️ **Foco da Sprint**: Blindar a entrada de dados da API. Criamos uma barreira (Middlewares) para garantir que apenas dados perfeitamente formatados cheguem à camada de regras de negócio, além de configurar permissões de acesso com CORS.
+- [X] Instalação e configuração de regras de CORS (`cors`)
+- [X] Criação de Schemas de validação rigorosos com `zod` e `strict mode`
+- [X] Implementação de Middleware genérico de validação (Higher-Order Function)
+- [X] Refatoração do Service (remoção de checagem de tipos manuais - Dead Code Elimination)
+- [X] Formatação de erros padronizados (HTTP 400) com apontamento exato do campo inválido
 
 ---
 
@@ -33,8 +33,8 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 | ✅ | **Sprint 1** | Fundamentos HTTP em ESModules: Primeiros endpoints em memória (`/quests` e `quests/complete`) |
 | ✅ | **Sprint 2** | Refatoração em camadas e migração para Express (Router, Controller, Service, Repository em memória) |
 | ✅ | **Sprint 3** | CRUD Completo (com Soft Delete), Paginação, Filtros e Middlewares Manuais (Logger e NotFound) |
-| 🟨 | **Sprint 4** | Validação de dados com Zod, Middleware de Validação e CORS básico |
-| ⬜ | **Sprint 5** | Sistema padronizado de Tratamento de Erros (AppError) e Helmet |
+| ✅ | **Sprint 4** | Validação de dados rigorosa com Zod, Middleware Genérico e CORS básico |
+| 🟨 | **Sprint 5** | Sistema padronizado de Tratamento de Erros (AppError) e Helmet |
 | ⬜ | **Sprint 6** | Persistência Local: Migração para JSON e Desafio SQLite nativo |
 | ⬜ | **Sprint 7** | Banco de Dados Profissional: Integração com PostgreSQL & Prisma ORM |
 | ⬜ | **Sprint 8** | Autenticação e Autorização com JWT |
