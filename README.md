@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Node.js-v24.18.0-green?style=for-the-badge&logo=node.js" alt="Node.js Version" />
-  <img src="https://img.shields.io/badge/Sprint%20Atual-Sprint%204-blue?style=for-the-badge&logo=git" alt="Sprint 4" />
+  <img src="https://img.shields.io/badge/Sprint%20Atual-Sprint%205-blue?style=for-the-badge&logo=git" alt="Sprint 5" />
   <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License" />
 </p>
 
@@ -15,13 +15,14 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 
 ---
 
-## 🚀 Status Atual: `Sprint 4` — Validação de Dados (Zod) e CORS
-> ⚙️ **Foco da Sprint**: Blindar a entrada de dados da API. Criamos uma barreira (Middlewares) para garantir que apenas dados perfeitamente formatados cheguem à camada de regras de negócio, além de configurar permissões de acesso com CORS.
-- [X] Instalação e configuração de regras de CORS (`cors`)
-- [X] Criação de Schemas de validação rigorosos com `zod` e `strict mode`
-- [X] Implementação de Middleware genérico de validação (Higher-Order Function)
-- [X] Refatoração do Service (remoção de checagem de tipos manuais - Dead Code Elimination)
-- [X] Formatação de erros padronizados (HTTP 400) com apontamento exato do campo inválido
+## 🚀 Status Atual: `Sprint 5` — Tratamento de Erros e Segurança Básica
+> ⚙️ **Foco da Sprint**: Padronizar e centralizar a captura e resposta de erros da aplicação utilizando uma hierarquia de erros customizada (AppError) e um middleware global, eliminando repetição de código. Além disso, preparar o terreno para código assíncrono (asyncWrapper) e blindar a API com o Helmet.
+- [ ] Bloco 1: A Fundação — Classes de Erro Customizadas (`utils/AppError.js`)
+- [ ] Bloco 2: O Guardião — Middleware Global de Erros (`error.middleware.js`)
+- [ ] Bloco 3: A Limpeza — Refatoração de Controllers e Services
+- [ ] Milestone de Release: Fim do Sincronismo Puro
+- [ ] Bloco 4: O Facilitador — Wrapper Async (`asyncWrapper`)
+- [ ] Bloco 5: A Armadura — Segurança Básica com `helmet`
 
 ---
 
