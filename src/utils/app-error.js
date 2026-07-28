@@ -2,8 +2,9 @@
 export class AppError extends Error {
 
     constructor (message,statusCode){
-        super(message);
+        super(message); //Repassa a mensagem para a classe Error nativa
         this.statusCode = statusCode;
+        this.name = this.constructor.name; //Pega o nome da classe atual dinamicamente
     }
 
 }

@@ -27,7 +27,7 @@ export class QuestController{
     }
 
     //Chama o service pra retornar a quest pelo id tratado
-    searchControll = (req, res) => {
+    searchControll = (req, res, next) => {
         //Pega o id da requisição e transforma em número
         const id = parseInt(req.params.id, 10);
 
@@ -36,13 +36,13 @@ export class QuestController{
             const quest = this.questService.getById(id);
             res.status(200).json(quest);
         }
-        catch(error){//Caso não exista a quest, retorna o erro lancado pelo service
-            res.status(404).json({message: error.message});
+        catch(error){//Caso não exista a quest, repassa o erro para o error handler
+            next(error);
         }
     }
 
     //Chama o service pra criar a quest com os dados do body
-    postControll = (req, res) => {
+    postControll = (req, res, next) => {
         //Quarda as informações do body
         const data = req.body;
 
@@ -51,13 +51,13 @@ export class QuestController{
             const newQuest = this.questService.create(data);
             res.status(201).json(newQuest);
         }
-        catch(error){//Caso não exista a quest, retorna o erro lancado pelo service
-            res.status(400).json({message: error.message});
+        catch(error){//Caso não exista a quest, repassa o erro para o error handler
+            next(error);
         }
     }
 
     //Chama o service pra atualizar a quest com os dados do body
-    putControll = (req, res) => {
+    putControll = (req, res, next) => {
         //Pega o id da requisição e transforma em número
         const id = parseInt(req.params.id, 10);
         //Quarda as informações do body
@@ -68,13 +68,13 @@ export class QuestController{
             const updatedQuest = this.questService.update(id, data);
             res.status(200).json(updatedQuest);
         }
-        catch(error){//Caso não exista a quest, retorna o erro lancado pelo service
-            res.status(404).json({message: error.message});
+        catch(error){//Caso não exista a quest, repassa o erro para o error handler
+            next(error);
         }
     }
 
     //Chama o service pra completar a quest com o id passado
-    completeControll = (req, res) => {
+    completeControll = (req, res, next) => {
         //Pega o id da requisição e transforma em número
         const id = parseInt(req.params.id, 10);
     
@@ -83,12 +83,12 @@ export class QuestController{
             const completedQuest = this.questService.complete(id);
             res.status(200).json(completedQuest);
         }
-        catch(error){//Caso não exista a quest, retorna o erro lancado pelo service
-            res.status(400).json({message: error.message});
+        catch(error){//Caso não exista a quest, repassa o erro para o error handler
+            next(error);
         }
     }
 
-    deleteControll = (req, res) => {
+    deleteControll = (req, res, next) => {
         //Pega o id da requisição e transforma em número
         const id = parseInt(req.params.id, 10);
 
@@ -98,7 +98,7 @@ export class QuestController{
             res.status(204).send();
         }
         catch(error){
-            res.status(404).json({message: error.message});
+            next(error);
         }
     }
 }

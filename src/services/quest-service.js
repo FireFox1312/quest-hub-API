@@ -1,3 +1,5 @@
+import { AppError, NotFoundError, ValidationError, ConflictError } from "../utils/app-error.js";
+
 export class QuestService {
     constructor(questRepository) {
         //Iniciando a propriedade questRepository
@@ -14,7 +16,7 @@ export class QuestService {
         const quest = this.questRepository.findById(id);
 
         //Verifica se existe, se não existe lança um erro
-        if(!quest) throw new Error('Quest não encontrada');
+        if(!quest) throw new NotFoundError('Quest não encontrada');
         
         return quest;
 
@@ -41,7 +43,7 @@ export class QuestService {
         const quest = this.getById(id);
 
         if(quest.completed){//Verifica se já está completada
-            throw new Error('Quest já completada');
+            throw new ValidationError('Quest já completada');
         }
         //Retorna a quest atualizada
         return this.questRepository.update(quest.id, {completed: true});

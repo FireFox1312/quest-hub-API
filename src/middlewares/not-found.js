@@ -1,4 +1,5 @@
+import { NotFoundError } from "../utils/app-error.js"
 
-export const notFound = (req, res) => {
-    res.status(404).json({message: 'Rota não encontrada'});
+export const notFound = (req, res, next) => {
+    next(new NotFoundError('Rota não encontrada'));
 }

@@ -1,4 +1,6 @@
 
+import { AppError } from './utils/app-error.js';
+
 export const errorHandler = (err, req, res, next) => {
 
     if(err instanceof AppError){//Verifica se o erro é uma instância de AppError e retorna a mensagem do erro
