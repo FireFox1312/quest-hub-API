@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.1](https://github.com/FireFox1312/quest-hub-API/compare/v0.4.0...v0.4.1) (2026-07-28)
+
+
+### Features
+
+* add global error handler middleware ([479a901](https://github.com/FireFox1312/quest-hub-API/commit/479a9016b129b470cc4fd5dbde484778bcbef5b6))
+* create custom AppError classes hierarchy ([16f939f](https://github.com/FireFox1312/quest-hub-API/commit/16f939f063b34780bd2af5cc9815f56cdcc0ca4d))
+
 ## [0.4.0](https://github.com/FireFox1312/quest-hub-API/compare/v0.3.2...v0.4.0) (2026-07-22)
 
 ### Features
