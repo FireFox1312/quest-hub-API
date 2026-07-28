@@ -2,7 +2,8 @@
 import express from 'express';
 import questRoute from './routes/quest-route.js';
 import { logger } from './middlewares/logger.js';
-import { notFound } from './middlewares/notFound.js';
+import { notFound } from './middlewares/not-found.js';
+import { errorHandler } from './middlewares/error-handle.js';
 
 //Objeto que vai conter todos o métodos do express
 const app = express();
@@ -26,6 +27,9 @@ app.get('/ping', (req,res)=>{
 
 //Se passar por tudo chama o middleware responsável pelo erro de rota não encontrada
 app.use(notFound);
+
+//Tratamento de erro da API
+app.use(errorHandler);
 
 //Exportação do app para ser usado no server.js
 export default app;
