@@ -1,5 +1,5 @@
 
-import { AppError } from './utils/app-error.js';
+import { AppError } from '../utils/app-error.js';
 
 export const errorHandler = (err, req, res, next) => {
 
