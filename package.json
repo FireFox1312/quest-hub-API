@@ -24,7 +24,8 @@
     "release": "standard-version"
   },
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "helmet": "^8.3.0"
   },
   "standard-version": {
     "types": [

@@ -4,9 +4,14 @@ import questRoute from './routes/quest-route.js';
 import { logger } from './middlewares/logger.js';
 import { notFound } from './middlewares/not-found.js';
 import { errorHandler } from './middlewares/error-handle.js';
+import helmet from 'helmet';
+
 
 //Objeto que vai conter todos o métodos do express
 const app = express();
+
+//Utiliza o helmet para adicionar cabeçalhos de segurança às respostas HTTP
+app.use(helmet());
 
 //Fará o parse dos dados para JSON
 app.use(express.json());
