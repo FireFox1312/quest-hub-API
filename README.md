@@ -17,12 +17,12 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 
 ## 🚀 Status Atual: `Sprint 5` — Tratamento de Erros e Segurança Básica
 > ⚙️ **Foco da Sprint**: Padronizar e centralizar a captura e resposta de erros da aplicação utilizando uma hierarquia de erros customizada (AppError) e um middleware global, eliminando repetição de código. Além disso, preparar o terreno para código assíncrono (asyncWrapper) e blindar a API com o Helmet.
-- [ ] Bloco 1: A Fundação — Classes de Erro Customizadas (`utils/AppError.js`)
-- [ ] Bloco 2: O Guardião — Middleware Global de Erros (`error.middleware.js`)
-- [ ] Bloco 3: A Limpeza — Refatoração de Controllers e Services
-- [ ] Milestone de Release: Fim do Sincronismo Puro
-- [ ] Bloco 4: O Facilitador — Wrapper Async (`asyncWrapper`)
-- [ ] Bloco 5: A Armadura — Segurança Básica com `helmet`
+- [x] Bloco 1: A Fundação — Classes de Erro Customizadas (`utils/AppError.js`)
+- [x] Bloco 2: O Guardião — Middleware Global de Erros (`error.middleware.js`)
+- [x] Bloco 3: A Limpeza — Refatoração de Controllers e Services
+- [x] Milestone de Release: Fim do Sincronismo Puro
+- [x] Bloco 4: O Facilitador — Wrapper Async (`asyncWrapper`)
+- [x] Bloco 5: A Armadura — Segurança Básica com `helmet`
 
 ---
 
@@ -35,8 +35,8 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 | ✅ | **Sprint 2** | Refatoração em camadas e migração para Express (Router, Controller, Service, Repository em memória) |
 | ✅ | **Sprint 3** | CRUD Completo (com Soft Delete), Paginação, Filtros e Middlewares Manuais (Logger e NotFound) |
 | ✅ | **Sprint 4** | Validação de dados rigorosa com Zod, Middleware Genérico e CORS básico |
-| 🟨 | **Sprint 5** | Sistema padronizado de Tratamento de Erros (AppError) e Helmet |
-| ⬜ | **Sprint 6** | Persistência Local: Migração para JSON e Desafio SQLite nativo |
+| ✅ | **Sprint 5** | Sistema padronizado de Tratamento de Erros (AppError) e Helmet |
+| 🟨 | **Sprint 6** | Persistência Local: Migração para JSON e Desafio SQLite nativo |
 | ⬜ | **Sprint 7** | Banco de Dados Profissional: Integração com PostgreSQL & Prisma ORM |
 | ⬜ | **Sprint 8** | Autenticação e Autorização com JWT |
 | ⬜ | **Sprint 9** | Segurança avançada e Rate Limit |
