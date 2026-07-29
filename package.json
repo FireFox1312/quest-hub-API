@@ -1,6 +1,6 @@
 {
   "name": "quest-hub-api",
-  "version": "0.4.6",
+  "version": "0.5.0",
   "description": "API para gerenciamento de quests e gamificação",
   "homepage": "https://github.com/FireFox1312/quest-hub-API#readme",
   "bugs": {

@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.5.0](https://github.com/FireFox1312/quest-hub-API/compare/v0.4.7...v0.5.0) (2026-07-29)
+
+
+### Features
+
+* add asyncWrapper to controllers removing try-catch blocks ([1a43cac](https://github.com/FireFox1312/quest-hub-API/commit/1a43caca46ff3685a363a26c6b87449330e80c50))
+
+
+### Bug Fixes
+
+* add cors import and define corsOptions ([eb220db](https://github.com/FireFox1312/quest-hub-API/commit/eb220db7af75694c95279d3e236f3351dcfbb987))
+* correct app-error import path and add missing dependencies (cors, zod) ([6b02ea3](https://github.com/FireFox1312/quest-hub-API/commit/6b02ea35d4dc657d50e1fe10c912041118d39efb))
+
 ## [0.4.6](https://github.com/FireFox1312/quest-hub-API/compare/v0.4.0...v0.4.6) (2026-07-28)
 
 ### Features
