@@ -5,7 +5,13 @@ import { logger } from './middlewares/logger.js';
 import { notFound } from './middlewares/not-found.js';
 import { errorHandler } from './middlewares/error-handle.js';
 import helmet from 'helmet';
+import cors from 'cors';
 
+//Configuração do CORS
+const corsOptions = {
+    origin: '*', // Permitir todas as origens
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
+};
 
 //Objeto que vai conter todos o métodos do express
 const app = express();
