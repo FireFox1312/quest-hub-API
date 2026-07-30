@@ -67,5 +67,35 @@ Você pode conferir a arquitetura original, incluindo os tratamentos manuais de 
 
 ---
 
-## 🔧 Como Executar o Projeto (Futuro)
-*Instruções de instalação e execução serão adicionadas nas próximas sprints.*
+## 🔧 Como Executar o Projeto
+
+### Pré-requisitos
+- Node.js instalado (v18 ou superior)
+- Git
+
+### Instalação
+
+1. Clone o repositório:
+```bash
+git clone https://github.com/FireFox1312/quest-hub-API.git
+cd quest-hub-API
+```
+
+2. Instale as dependências do projeto:
+```bash
+npm install
+```
+
+3. Instale as ferramentas globais recomendadas (opcional, para geração automatizada de Changelog e Tags):
+```bash
+npm install -g standard-version
+```
+
+### Executando a API
+
+Para rodar o servidor localmente na porta 3000:
+```bash
+npm start
+```
+
+Você pode testar a API utilizando a extensão **REST Client** no VSCode utilizando o arquivo `client.http` incluído no projeto.
