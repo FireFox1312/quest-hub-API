@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Node.js-v24.18.0-green?style=for-the-badge&logo=node.js" alt="Node.js Version" />
-  <img src="https://img.shields.io/badge/Sprint%20Atual-Sprint%205-blue?style=for-the-badge&logo=git" alt="Sprint 5" />
+  <img src="https://img.shields.io/badge/Sprint%20Atual-Sprint%206-blue?style=for-the-badge&logo=git" alt="Sprint 6" />
   <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License" />
 </p>
 
@@ -15,14 +15,16 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 
 ---
 
-## 🚀 Status Atual: `Sprint 5` — Tratamento de Erros e Segurança Básica
-> ⚙️ **Foco da Sprint**: Padronizar e centralizar a captura e resposta de erros da aplicação utilizando uma hierarquia de erros customizada (AppError) e um middleware global, eliminando repetição de código. Além disso, preparar o terreno para código assíncrono (asyncWrapper) e blindar a API com o Helmet.
-- [x] Bloco 1: A Fundação — Classes de Erro Customizadas (`utils/AppError.js`)
-- [x] Bloco 2: O Guardião — Middleware Global de Erros (`error.middleware.js`)
-- [x] Bloco 3: A Limpeza — Refatoração de Controllers e Services
-- [x] Milestone de Release: Fim do Sincronismo Puro
-- [x] Bloco 4: O Facilitador — Wrapper Async (`asyncWrapper`)
-- [x] Bloco 5: A Armadura — Segurança Básica com `helmet`
+## 🚀 Status Atual: `Sprint 6` — Persistência Inicial (JSON e SQLite)
+> ⚙️ **Foco da Sprint**: Substituir o armazenamento volátil (memória RAM) por persistência de dados real. Implementaremos a persistência baseada em arquivos (JSON) e daremos o primeiro passo em bancos de dados relacionais com SQLite, tudo mantendo a Injeção de Dependência intacta através de um contrato rigoroso de Repository.
+- [ ] Bloco 1: Contrato do Repository (Interface via JSDoc)
+- [ ] Bloco 2: Estrutura do Banco JSON
+- [ ] Bloco 3: QuestJsonRepository (Leitura e Escrita)
+- [ ] Bloco 4: Fluxo Assíncrono (Service/Controller)
+- [ ] Bloco 5: Injeção do JSON Repository e Validação (Release v0.5.5)
+- [ ] Bloco 6: Setup do SQLite e Criação do Schema
+- [ ] Bloco 7: QuestSqliteRepository e Paginação Nativa
+- [ ] Bloco 8: Swap para SQLite e Validação (Release v0.6.0)
 
 ---
 
@@ -36,14 +38,15 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 | ✅ | **Sprint 3** | CRUD Completo (com Soft Delete), Paginação, Filtros e Middlewares Manuais (Logger e NotFound) |
 | ✅ | **Sprint 4** | Validação de dados rigorosa com Zod, Middleware Genérico e CORS básico |
 | ✅ | **Sprint 5** | Sistema padronizado de Tratamento de Erros (AppError) e Helmet |
-| 🟨 | **Sprint 6** | Persistência Local: Migração para JSON e Desafio SQLite nativo |
-| ⬜ | **Sprint 7** | Banco de Dados Profissional: Integração com PostgreSQL & Prisma ORM |
+| 🟨 | **Sprint 6** | Persistência Local: Migração para JSON e banco relacional com SQLite nativo |
+| ⬜ | **Sprint 7** | Banco de Dados Profissional: PostgreSQL, Prisma ORM e Container de Injeção de Dependência (Alternância entre Memory, JSON, SQLite e Prisma) |
 | ⬜ | **Sprint 8** | Autenticação e Autorização com JWT |
 | ⬜ | **Sprint 9** | Segurança avançada e Rate Limit |
-| ⬜ | **Sprint 10** | Middlewares avançados de log e monitoramento de performance |
-| ⬜ | **Sprint 11** | Documentação interativa com Swagger/OpenAPI |
+| ⬜ | **Sprint 10** | Documentação interativa com Swagger/OpenAPI |
+| ⬜ | **Sprint 11** | Middlewares avançados de log e monitoramento de performance |
 | ⬜ | **Sprint 12** | Testes Unitários e de Integração |
 | ⬜ | **Sprint 13** | Observabilidade estruturada e Health Check |
+| ⬜ | **Sprint 14** | Infraestrutura e Deploy: Docker, Docker Compose e conteinerização da API |
 
 *(Legenda: ⬜ Não Iniciado | 🟨 Em Andamento | ✅ Concluído)*
 
