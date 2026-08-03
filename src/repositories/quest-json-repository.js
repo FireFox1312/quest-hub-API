@@ -56,4 +56,113 @@ export class QuestJsonRepository extends RepositoryInterface {
         }
     }
 
+    create = async (data) => {
+
+        const db = await this._readData();//Lê os dados atuais do arquivo JSON
+
+        const newQuest = {
+            id: db.nextId++,
+            title: data.title.trim(),
+            description: typeof data.description === 'string' ? data.description.trim() : '',
+            category: data.category,
+            xp: data.xp ? Number(data.xp) : 0,
+            difficulty: data.difficulty,
+            completed: typeof data.completed === 'boolean' ? data.completed : false,
+            deleteAt: null
+        };
+
+        db.quests.push(newQuest);//Adiciona a nova quest
+        await this._writeData(db);//Escreve os dados atualizados no arquivo JSON
+
+        return newQuest;//Retorna a nova quest criada
+    }
+
+    findAll = async (filters) => {
+        const db = await this._readData();
+
+        //Filtra as quests que não foram deletadas
+        let filteredQuests = db.quests.filter(quest => quest.deleteAt === null);
+
+        //Aplica os filtros de dificuldade
+        if (filters.difficulty) {
+            filteredQuests = filteredQuests.filter(quest => quest.difficulty === filters.difficulty);
+        }
+
+        //Aplica os filtros de completude
+        if (filters.completed !== undefined) {
+            const completed = filters.completed === 'true';
+            filteredQuests = filteredQuests.filter(quest => quest.completed === completed);
+        }
+        
+        //Aplica a paginação e calcula os metadados
+        const page = filters.page || 1;
+        const limit = filters.limit || 10;
+
+        const startIndex = (page - 1) * limit;
+        const totalItens = filteredQuests.length;
+
+        filteredQuests = filteredQuests.slice(startIndex, startIndex + limit);
+
+        const response = {
+            data: filteredQuests,
+            meta: {
+                totalItens: totalItens,
+                currentPage: page,
+                totalPages: Math.ceil(totalItens / limit),
+                limit: limit
+            }
+        };
+
+        return response;
+    }
+
+    findById = async (id) => {
+        //Lê os dados do arquivo JSON
+        const db = await this._readData();
+        //Busca a quest pelo id
+        const quest = db.quests.find(quest => quest.id === id && quest.deleteAt === null);
+        
+        //Retorna a quest se ela não for deletada, caso contrário retorna null
+        return quest || null;
+    }
+
+    update = async (id, data) => {
+
+        const db = await this._readData();
+
+        //Busca a quest pelo id
+        const questIndex = db.quests.findIndex(quest => quest.id === id && quest.deleteAt === null);
+
+        if (questIndex === -1) {//Se a quest não for encontrada ou estiver deletada, retorna null
+            return null;
+        }
+
+        //Sobreescreve e força o id original para evitar adulteração
+        db.quests[questIndex] = { 
+            ...db.quests[questIndex], 
+            ...data,
+            id: db.quests[questIndex].id
+        };
+
+        //Escreve os dados atualizados no arquivo JSON
+        await this._writeData(db);
+        //Retorna a quest atualizada
+        return db.quests[questIndex];
+    }
+
+    delete = async (id) => {
+
+        //Busca a quest pelo id
+        const quest = await this.findById(id);
+
+        if (!quest) {
+            return null;
+        }
+
+        await this.update(id, { deleteAt: new Date().toISOString() });
+
+        return quest;
+
+    }
+
 }
