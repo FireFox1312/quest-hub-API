@@ -17,11 +17,11 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 
 ## 🚀 Status Atual: `Sprint 6` — Persistência Inicial (JSON e SQLite)
 > ⚙️ **Foco da Sprint**: Substituir o armazenamento volátil (memória RAM) por persistência de dados real. Implementaremos a persistência baseada em arquivos (JSON) e daremos o primeiro passo em bancos de dados relacionais com SQLite, tudo mantendo a Injeção de Dependência intacta através de um contrato rigoroso de Repository.
-- [ ] Bloco 1: Contrato do Repository (Interface via JSDoc)
-- [ ] Bloco 2: Estrutura do Banco JSON
-- [ ] Bloco 3: QuestJsonRepository (Leitura e Escrita)
-- [ ] Bloco 4: Fluxo Assíncrono (Service/Controller)
-- [ ] Bloco 5: Injeção do JSON Repository e Validação (Release v0.5.5)
+- [x] Bloco 1: Contrato do Repository (Interface via JSDoc)
+- [x] Bloco 2: Estrutura do Banco JSON
+- [x] Bloco 3: QuestJsonRepository (Leitura e Escrita)
+- [x] Bloco 4: Fluxo Assíncrono (Service/Controller)
+- [x] Bloco 5: Injeção do JSON Repository e Validação (Release v0.5.5)
 - [ ] Bloco 6: Setup do SQLite e Criação do Schema
 - [ ] Bloco 7: QuestSqliteRepository e Paginação Nativa
 - [ ] Bloco 8: Swap para SQLite e Validação (Release v0.6.0)
