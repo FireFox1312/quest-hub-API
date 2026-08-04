@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.1](https://github.com/FireFox1312/quest-hub-API/compare/v0.5.0...v0.5.1) (2026-08-04)
+
+
+### Features
+
+* Addition of a JSON repository ([a74cd72](https://github.com/FireFox1312/quest-hub-API/commit/a74cd72777cf0e61520bc3309770e21fec62f6e0))
+* **repository:** create Quest repository interface contract ([6ee76bb](https://github.com/FireFox1312/quest-hub-API/commit/6ee76bbf865f9b5eed10c21b99ce4118da76a3e0))
+* **repository:** implement full QuestJsonRepository with file persistence ([4c5a790](https://github.com/FireFox1312/quest-hub-API/commit/4c5a7900a7c6465f46bb11ed7bcda6b9933df638))
+* **routes:** inject QuestJsonRepository as main persistence ([19bdf21](https://github.com/FireFox1312/quest-hub-API/commit/19bdf21c1c48a84aafd9b8b8bb8aef2291eaeee6))
+
 ## [0.5.0](https://github.com/FireFox1312/quest-hub-API/compare/v0.4.6...v0.5.0) (2026-07-29)
 
 
