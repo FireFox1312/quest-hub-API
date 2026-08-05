@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.6.0](https://github.com/FireFox1312/quest-hub-API/compare/v0.5.5...v0.6.0) (2026-08-05)
+
+
+### Features
+
+* create and findById methods implemented ([13f65a5](https://github.com/FireFox1312/quest-hub-API/commit/13f65a52d52afc3d2cc4aa72fbc5eb585a78b4da))
+* **database:** setup SQLite and initial schema ([448353e](https://github.com/FireFox1312/quest-hub-API/commit/448353ed0e71097bf37c4d1fe9350ba195e9bc57))
+* **repository:** add QuestSqliteRepository skeleton with static factory ([d921feb](https://github.com/FireFox1312/quest-hub-API/commit/d921feb9afd6a23da4bc2fd6df06bfd36d2ccf54))
+* **repository:** complete QuestSqliteRepository CRUD operations ([b581186](https://github.com/FireFox1312/quest-hub-API/commit/b581186b0dddfb1ff7b6e852d7f9ad4881115fa5))
+* swap to QuestSqliteRepository ([565665e](https://github.com/FireFox1312/quest-hub-API/commit/565665eb171378d2fe40b85719fb21d89cb1dcd4))
+
+
+### Bug Fixes
+
+* Boolean conversion ([f97e584](https://github.com/FireFox1312/quest-hub-API/commit/f97e584a5335a2a46645ff657e1271dab1fd9b2c))
+
 ## [0.5.0](https://github.com/FireFox1312/quest-hub-API/compare/v0.4.6...v0.5.0) (2026-07-29)
 
 
