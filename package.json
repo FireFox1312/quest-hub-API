@@ -1,6 +1,6 @@
 {
   "name": "quest-hub-api",
-  "version": "0.5.0",
+  "version": "0.5.5",
   "description": "API para gerenciamento de quests e gamificação",
   "homepage": "https://github.com/FireFox1312/quest-hub-API#readme",
   "bugs": {
@@ -28,6 +28,8 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "helmet": "^8.3.0",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^6.0.1",
     "zod": "^4.4.3"
   },
   "standard-version": {

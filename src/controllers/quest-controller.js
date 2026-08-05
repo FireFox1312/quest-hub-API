@@ -23,7 +23,7 @@ export class QuestController{
         filters.limit = limit;
 
         //Guarda a lista retornada pelo service
-        const questList = this.questService.getAll(filters);
+        const questList = await this.questService.getAll(filters);
         res.status(200).json(questList);
     })
 
@@ -33,7 +33,7 @@ export class QuestController{
         const id = parseInt(req.params.id, 10);
 
         //Guarda a quest retornada pelo service
-        const quest = this.questService.getById(id);
+        const quest = await this.questService.getById(id);
         res.status(200).json(quest);
         
     })
@@ -44,7 +44,7 @@ export class QuestController{
         const data = req.body;
 
         //Guarda a quest criada pelo service
-        const newQuest = this.questService.create(data);
+        const newQuest = await this.questService.create(data);
         res.status(201).json(newQuest);
         
     })
@@ -57,7 +57,7 @@ export class QuestController{
         const data = req.body;
         
         //Guarda a quest atualizada pelo service
-        const updatedQuest = this.questService.update(id, data);
+        const updatedQuest = await this.questService.update(id, data);
         res.status(200).json(updatedQuest);
         
     })
@@ -68,7 +68,7 @@ export class QuestController{
         const id = parseInt(req.params.id, 10);
         
         //Guarda a quest completada pelo service
-        const completedQuest = this.questService.complete(id);
+        const completedQuest = await this.questService.complete(id);
         res.status(200).json(completedQuest);
         
     })
@@ -77,7 +77,7 @@ export class QuestController{
         //Pega o id da requisição e transforma em número
         const id = parseInt(req.params.id, 10);
        
-        const deletedQuest = this.questService.delete(id);
+        const deletedQuest = await this.questService.delete(id);
             
         res.status(204).send();
     
