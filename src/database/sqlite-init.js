@@ -29,7 +29,7 @@ export async function initSqliteDatabase() {
         );
     `)
 
-    console.log('Banco de dados SQLite inicializado com sucesso!');
+    console.log('Banco de dados SQLite inicializado com sucesso! \n');
 
     return db;
 
