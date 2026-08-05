@@ -1,8 +1,6 @@
 //Importações do express e das classes
 import express from 'express';
-//import { QuestRepository } from '../repositories/quest-repository.js'; //Comentado para usar o QuestJSONRepository
-//import { QuestJsonRepository } from '../repositories/quest-json-repository.js'; //Comentado para usar o QuestSqliteRepository
-import { QuestSqliteRepository } from '../repositories/quest-sqlite-repository.js';
+import { QuestRepository } from '../repositories/quest-repository.js';
 import { QuestService } from '../services/quest-service.js';
 import { QuestController } from '../controllers/quest-controller.js';
 import { validate } from '../middlewares/validation.js';
@@ -10,7 +8,7 @@ import { questSchema, updateQuestSchema, idParamSchema } from '../schemas/quest-
 
 
 //Injeção de dependência, criando instâncias das classes e passando elas para o construtor da próxima classe
-const questRepository = await QuestSqliteRepository.create(); //Criando a instância do QuestSqliteRepository e inicializando o banco de dados
+const questRepository = new QuestRepository();
 const questService = new QuestService(questRepository);
 const questController = new QuestController(questService);
 
