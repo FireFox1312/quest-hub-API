@@ -71,7 +71,7 @@ export class QuestSqliteRepository extends RepositoryInterface {
             data.category !== undefined ? data.category : null, 
             data.xp !== undefined ? data.xp : null, 
             data.difficulty !== undefined ? data.difficulty : null, 
-            data.completed !== undefined ? parseInt(data.completed) : null, 
+            data.completed !== undefined ? Number(data.completed) : null, 
             data.deleteAt !== undefined ? data.deleteAt : null, 
             id
         ];
@@ -114,8 +114,9 @@ export class QuestSqliteRepository extends RepositoryInterface {
                 //Concatena a query de busca com o filtro de completed
                 query += ` AND completed = ?`;
                 countQuery += ` AND completed = ?`;
-                //Adiciona o valor do filtro de completed ao array de valores
-                values.push(parseInt(filters.completed));
+                //Adiciona o valor do filtro de completed ao array de valores (1 para true, 0 para false)
+                const completedValue = filters.completed === 'true' ? 1 : 0;
+                values.push(completedValue);
             }
         
         }
