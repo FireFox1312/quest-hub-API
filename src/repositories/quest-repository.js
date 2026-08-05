@@ -24,7 +24,7 @@ export class QuestRepository{
             return null;
         }
 
-        //---- Paginação e Metadados ----
+        //---- Paginação ----
 
         const page = filters.page;
         const limit = filters.limit;
