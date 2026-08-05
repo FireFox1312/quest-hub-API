@@ -22,9 +22,9 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 - [x] Bloco 3: QuestJsonRepository (Leitura e Escrita)
 - [x] Bloco 4: Fluxo Assíncrono (Service/Controller)
 - [x] Bloco 5: Injeção do JSON Repository e Validação (Release v0.5.5)
-- [ ] Bloco 6: Setup do SQLite e Criação do Schema
-- [ ] Bloco 7: QuestSqliteRepository e Paginação Nativa
-- [ ] Bloco 8: Swap para SQLite e Validação (Release v0.6.0)
+- [x] Bloco 6: Setup do SQLite e Criação do Schema
+- [x] Bloco 7: QuestSqliteRepository e Paginação Nativa
+- [x] Bloco 8: Swap para SQLite e Validação (Release v0.6.0)
 
 ---
 
@@ -38,8 +38,8 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 | ✅ | **Sprint 3** | CRUD Completo (com Soft Delete), Paginação, Filtros e Middlewares Manuais (Logger e NotFound) |
 | ✅ | **Sprint 4** | Validação de dados rigorosa com Zod, Middleware Genérico e CORS básico |
 | ✅ | **Sprint 5** | Sistema padronizado de Tratamento de Erros (AppError) e Helmet |
-| 🟨 | **Sprint 6** | Persistência Local: Migração para JSON e banco relacional com SQLite nativo |
-| ⬜ | **Sprint 7** | Banco de Dados Profissional: PostgreSQL, Prisma ORM e Container de Injeção de Dependência (Alternância entre Memory, JSON, SQLite e Prisma) |
+| ✅ | **Sprint 6** | Persistência Local: Migração para JSON e banco relacional com SQLite nativo |
+| 🟨 | **Sprint 7** | Banco de Dados Profissional: PostgreSQL, Prisma ORM e Container de Injeção de Dependência (Alternância entre Memory, JSON, SQLite e Prisma) |
 | ⬜ | **Sprint 8** | Autenticação e Autorização com JWT |
 | ⬜ | **Sprint 9** | Segurança avançada e Rate Limit |
 | ⬜ | **Sprint 10** | Documentação interativa com Swagger/OpenAPI |
