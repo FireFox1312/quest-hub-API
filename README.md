@@ -46,7 +46,7 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 | ⬜ | **Sprint 11** | Middlewares avançados de log e monitoramento de performance |
 | ⬜ | **Sprint 12** | Testes Unitários e de Integração |
 | ⬜ | **Sprint 13** | Observabilidade estruturada e Health Check |
-| ⬜ | **Sprint 14** | Infraestrutura e Deploy: Docker, Docker Compose e conteinerização da API |
+| ⬜ | **Sprint 14** | Infraestrutura e Deploy: Conteinerização da API |
 
 *(Legenda: ⬜ Não Iniciado | 🟨 Em Andamento | ✅ Concluído)*
 
@@ -75,6 +75,7 @@ Você pode conferir a arquitetura original, incluindo os tratamentos manuais de 
 ### Pré-requisitos
 - Node.js instalado (v18 ou superior)
 - Git
+- Docker Desktop (para rodar o banco de dados localmente)
 
 ### Instalação
 
@@ -89,14 +90,20 @@ cd quest-hub-API
 npm install
 ```
 
-3. Instale as ferramentas globais recomendadas (opcional, para geração automatizada de Changelog e Tags):
+3. Configure as variáveis de ambiente. Crie um arquivo `.env` na raiz do projeto baseado no `.env.example`:
+```env
+PORT=3000
+DATABASE_URL="postgresql://root:rootpassword@localhost:5432/questhub"
+```
+
+4. Suba o banco de dados (PostgreSQL) e a interface gráfica (pgAdmin) utilizando o Docker:
 ```bash
-npm install -g standard-version
+docker-compose up -d
 ```
 
 ### Executando a API
 
-Para rodar o servidor localmente na porta 3000:
+Após o banco estar rodando, inicie o servidor localmente na porta 3000:
 ```bash
 npm start
 ```
