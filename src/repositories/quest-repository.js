@@ -1,23 +1,25 @@
+import { RepositoryInterface } from "./quest-repository.interface.js";
 
-export class QuestRepository{
+export class QuestRepository extends RepositoryInterface {
     constructor() {//Inicializando o array de quests e o contador de id
+        super();
         this.quests = [];
         this.questId = 0;
     }
     
-    findAll(filters) {//Método para retornar todas as quests que estejam ativas e aplica filtros, se ouver.
+    async findAll(filters) {//Método para retornar todas as quests que estejam ativas e aplica filtros, se ouver.
 
         //Filtra as quests que não foram deletadas
         let objQuest = this.quests.filter((quest) => quest.deleteAt === null);
 
-        if(filters.difficulty){
+        if(filters && filters.difficulty){
             objQuest = objQuest.filter((quest) => quest.difficulty === filters.difficulty);
         }
 
-        if(filters.completed){
+        if(filters && filters.completed){
             //Altera para verdadeiro (boleano) caso as string no query params for "true"
-            filters.completed = filters.completed === 'true';
-            objQuest = objQuest.filter((quest) => quest.completed === filters.completed);
+            const isCompleted = filters.completed === 'true';
+            objQuest = objQuest.filter((quest) => quest.completed === isCompleted);
         }
 
         if(objQuest.length === 0){
@@ -26,8 +28,8 @@ export class QuestRepository{
 
         //---- Paginação e Metadados ----
 
-        const page = filters.page;
-        const limit = filters.limit;
+        const page = (filters && filters.page) ? parseInt(filters.page, 10) : 1;
+        const limit = (filters && filters.limit) ? parseInt(filters.limit, 10) : 10;
 
         const startIndex = (page - 1) * limit;
         const totalItens = objQuest.length;
@@ -47,7 +49,7 @@ export class QuestRepository{
         return response;
     }
     
-    findById(id) {//Método para retornar uma quest pelo id, exceto se ela foi deletada
+    async findById(id) {//Método para retornar uma quest pelo id, exceto se ela foi deletada
         //Busca a quest pelo id
         const objQuest = this.quests.find((quest) => quest.id === id);
 
@@ -58,7 +60,7 @@ export class QuestRepository{
         return objQuest.deleteAt === null ? objQuest : null;
     }
 
-    create(data) {//Método para criar uma nova quest
+    async create(data) {//Método para criar uma nova quest
         const newQuest = {
             id: ++this.questId,
             title: data.title.trim(),
@@ -76,7 +78,7 @@ export class QuestRepository{
         return newQuest;
     }
 
-    update(id, data) {//Método para atualizar uma quest existente
+    async update(id, data) {//Método para atualizar uma quest existente
         const index = this.quests.findIndex((quest) => quest.id === id);
 
         if(index === -1){//Verifica se existe no array
@@ -93,16 +95,16 @@ export class QuestRepository{
         return this.quests[index];
     }
 
-    delete(id) {//Método para deletar uma quest
+    async delete(id) {//Método para deletar uma quest
 
         //Busca a quest pelo id
-        const objQuest = this.findById(id);
+        const objQuest = await this.findById(id);
 
         if(objQuest === null){//Verifica se existe no array
             return null;
         }
         else{//Se existe, chama o método update para alterar a propriedade deleteAt para a data atual
-            return this.update(id, {deleteAt: new Date().toISOString()});
+            return await this.update(id, {deleteAt: new Date().toISOString()});
         }
     }
 
