@@ -24,6 +24,7 @@
     "release": "standard-version"
   },
   "dependencies": {
+    "@prisma/client": "^7.9.1",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
@@ -43,5 +44,8 @@
         "section": "Bug Fixes"
       }
     ]
+  },
+  "devDependencies": {
+    "prisma": "^7.9.1"
   }
 }
