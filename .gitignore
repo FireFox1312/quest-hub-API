@@ -1,3 +1,9 @@
 # Dependency directories
 node_modules/
 .env
+
+# Database files
+*.db
+*.db-journal
+
+/src/generated/prisma

@@ -1,0 +1,33 @@
+
+# Docker Compose file for QuestHub application - with comments in Portuguese for better understanding
+
+version: '3.8'
+
+services: #Listagem de serviços que serão executados no Docker Compose
+  postgres: #Serviço do banco de dados PostgreSQL
+    image: postgres:16 
+    container_name: questhub_pg
+    restart: always #Reiniciar o container sempre que ele parar
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: rootpassword
+      POSTGRES_DB: questhub #Auto criação do banco de dados "questhub"
+    ports: #Formato: "host_port:container_port"
+      - "5432:5432"
+    volumes: #Formato: "host_path:container_path"
+      - pgdata:/var/lib/postgresql/data
+
+  pgadmin: #Serviço do banco de dados PostgreSQL Admin
+    image: dpage/pgadmin4
+    container_name: questhub_pgadmin
+    restart: always #Reiniciar o container sempre que ele parar
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports: #Formato: "host_port:container_port" - mapeado para acesso via navegador
+      - "5050:80"
+    depends_on:
+      - postgres
+
+volumes: #Listagem de volumes que serão criados no Docker
+  pgdata:
