@@ -9,11 +9,11 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
 }
 
 model Quest {
-  id          Int       @id @default(autoincrement()) 
+  id          String    @id @default(uuid())
   title       String
   description String?   
   category    String
