@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.5](https://github.com/FireFox1312/quest-hub-API/compare/v0.6.0...v0.6.5) (2026-08-11)
+
+
+### Features
+
+* config prisma orm and create initial schema ([c609000](https://github.com/FireFox1312/quest-hub-API/commit/c6090007f9d7b949fe9d79cc9b0c96e5cc804750))
+* create quest repository factory ([56f4d26](https://github.com/FireFox1312/quest-hub-API/commit/56f4d26dc6bbd02e09cf176046b7f1c25ed5a507))
+* implement QuestPrismaRepository with full CRUD ([109ef86](https://github.com/FireFox1312/quest-hub-API/commit/109ef863509cfa82a6c4d0d0d87871ef55d6512d))
+
+
+### Bug Fixes
+
+* make memory repository async and extends interface ([92c4083](https://github.com/FireFox1312/quest-hub-API/commit/92c4083628114cc1675362bec10b5a8e2e3c6d9e))
+* remove sqlite artifacts and set postgresql as db provider ([af03644](https://github.com/FireFox1312/quest-hub-API/commit/af036449845cad594db0f0bbe97bb950df06405f))
+* resolve PrismaClient initialization error on ESM ([7f071b9](https://github.com/FireFox1312/quest-hub-API/commit/7f071b916904ce8c3619aa5461c1d9aade23ed44))
+* restore Sprint 6 persistence layer (revert the revert) ([183daae](https://github.com/FireFox1312/quest-hub-API/commit/183daae1cec9ae90a0fee270c7878d1d188a7b77)), closes [#14](https://github.com/FireFox1312/quest-hub-API/issues/14)
+
 ## [0.6.0](https://github.com/FireFox1312/quest-hub-API/compare/v0.5.5...v0.6.0) (2026-08-05)
 
 
