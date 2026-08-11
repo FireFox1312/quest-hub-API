@@ -6,4 +6,13 @@ node_modules/
 *.db
 *.db-journal
 
+# AI Assistants and IDE config
+.claude/
+.windsurf/
+.agents/
+.cursor/
+.vscode/
+.idea/
+skills-lock.json
+
 /src/generated/prisma
