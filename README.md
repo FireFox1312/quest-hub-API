@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Node.js-v24.18.0-green?style=for-the-badge&logo=node.js" alt="Node.js Version" />
-  <img src="https://img.shields.io/badge/Sprint%20Atual-Sprint%207-blue?style=for-the-badge&logo=git" alt="Sprint 7" />
+  <img src="https://img.shields.io/badge/Sprint%20Atual-Sprint%208-blue?style=for-the-badge&logo=git" alt="Sprint 8" />
   <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License" />
 </p>
 
@@ -15,15 +15,14 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 
 ---
 
-## 🚀 Status Atual: `Sprint 7` — Banco de Dados Profissional (PostgreSQL e Prisma ORM)
-> ⚙️ **Foco da Sprint**: Substituir os bancos de dados locais por um sistema relacional robusto focado em produção. Implementaremos o PostgreSQL via Docker e usaremos o Prisma ORM para gerenciar o esquema e as conexões. Além disso, criaremos uma Factory para injetar dinamicamente o repositório adequado com base nas variáveis de ambiente.
-- [x] Bloco 1: Setup do PostgreSQL com Docker e Configuração do Prisma
-- [x] Bloco 2: Criação do Schema e Migrations
-- [x] Bloco 3: Refatoração de IDs (UUID)
-- [x] Bloco 4: Implementação do QuestPrismaRepository (CRUD)
-- [x] Bloco 5: Padrão Factory (QuestRepositoryFactory)
-- [x] Bloco 6: Refatoração do Composition Root (`quest-route.js`)
-- [x] Bloco 7: Documentação e Release v0.7.0
+## 🚀 Status Atual: `Sprint 8` — Autenticação e Autorização com JWT
+> ⚙️ **Foco da Sprint**: Implementar sistema de usuários, proteger rotas e isolar dados (multi-tenancy básico). Os usuários poderão se cadastrar, fazer login (recebendo um JWT) e interagir de forma segura, garantindo que cada um só acesse suas próprias Quests.
+- [ ] Bloco 1: Fundação: Modelo User + Migration
+- [ ] Bloco 2: Camada de Dados: User Repository + Schemas Zod
+- [ ] Bloco 3: Regra de Negócio: Auth Service (Register + Login)
+- [ ] Bloco 4: Camada de Entrada: Auth Controller + Rotas Públicas
+- [ ] Bloco 5: Middleware de Autenticação (Proteger Rotas)
+- [ ] Bloco 6: Filtro por Usuário (Autorização)
 
 ---
 
@@ -38,14 +37,15 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 | ✅ | **Sprint 4** | Validação de dados rigorosa com Zod, Middleware Genérico e CORS básico |
 | ✅ | **Sprint 5** | Sistema padronizado de Tratamento de Erros (AppError) e Helmet |
 | ✅ | **Sprint 6** | Persistência Local: Migração para JSON e banco relacional com SQLite nativo |
-| ✅ | **Sprint 7** | Banco de Dados Profissional: PostgreSQL, Prisma ORM e Container de Injeção de Dependência (Alternância entre Memory, JSON, SQLite e Prisma) |
-| ⬜ | **Sprint 8** | Autenticação e Autorização com JWT |
-| ⬜ | **Sprint 9** | Segurança avançada e Rate Limit |
-| ⬜ | **Sprint 10** | Documentação interativa com Swagger/OpenAPI |
-| ⬜ | **Sprint 11** | Middlewares avançados de log e monitoramento de performance |
+| ✅ | **Sprint 7** | Banco de Dados Profissional: PostgreSQL, Prisma ORM e Fábrica de Repositórios (Injeção Dinâmica) |
+| 🟨 | **Sprint 8** | Autenticação, Cadastro, login e Quests por usuário (JWT) |
+| ⬜ | **Sprint 9** | Segurança, CORS, Helmet, Rate Limit e proteções diversas |
+| ⬜ | **Sprint 10** | Documentação via Swagger/OpenAPI |
+| ⬜ | **Sprint 11** | Middlewares próprios de logging e tempo de resposta |
 | ⬜ | **Sprint 12** | Testes Unitários e de Integração |
-| ⬜ | **Sprint 13** | Observabilidade estruturada e Health Check |
-| ⬜ | **Sprint 14** | Infraestrutura e Deploy: Conteinerização da API |
+| ⬜ | **Sprint 13** | Logging estruturado, Observabilidade e Health check |
+| ⬜ | **Sprint 14** | Docker e Docker Compose para a API |
+| ⬜ | **Sprint 15** | CI/CD Pipeline (GitHub Actions) e Deploy em Produção |
 
 *(Legenda: ⬜ Não Iniciado | 🟨 Em Andamento | ✅ Concluído)*
 
