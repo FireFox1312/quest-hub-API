@@ -29,8 +29,8 @@ export class QuestController{
 
     //Chama o service pra retornar a quest pelo id tratado
     searchControll = asyncWrapper(async(req, res, next) => {
-        //Pega o id da requisição e transforma em número
-        const id = parseInt(req.params.id, 10);
+        //Pega o id já validado pelo middleware de validação de id
+        const id = req.params.id;
 
         //Guarda a quest retornada pelo service
         const quest = await this.questService.getById(id);
@@ -51,8 +51,8 @@ export class QuestController{
 
     //Chama o service pra atualizar a quest com os dados do body
     putControll = asyncWrapper(async(req, res, next) => {
-        //Pega o id da requisição e transforma em número
-        const id = parseInt(req.params.id, 10);
+        //Pega o id já validado pelo middleware de validação de id
+        const id = req.params.id;
         //Quarda as informações do body
         const data = req.body;
         
@@ -64,8 +64,8 @@ export class QuestController{
 
     //Chama o service pra completar a quest com o id passado
     completeControll = asyncWrapper(async(req, res, next) => {
-        //Pega o id da requisição e transforma em número
-        const id = parseInt(req.params.id, 10);
+        //Pega o id já validado pelo middleware de validação de id
+        const id = req.params.id;
         
         //Guarda a quest completada pelo service
         const completedQuest = await this.questService.complete(id);
@@ -74,8 +74,8 @@ export class QuestController{
     })
 
     deleteControll = asyncWrapper(async(req, res, next) => {
-        //Pega o id da requisição e transforma em número
-        const id = parseInt(req.params.id, 10);
+        //Pega o id já validado pelo middleware de validação de id
+        const id = req.params.id;
        
         const deletedQuest = await this.questService.delete(id);
             

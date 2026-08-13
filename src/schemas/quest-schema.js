@@ -19,9 +19,9 @@ export const updateQuestSchema = questSchema.partial();
 
 //Schema de validação do Id passado no parâmetro, se tiver
 export const idParamSchema = z.object({
-    id: z.coerce.number({
-        invalid_type_error: 'O id deve ser um número válido'
-    })
+    id: z.string({
+        invalid_type_error: 'O uuid deve ser uma string válida'
+    }).uuid()
 }).strict();
 
 
