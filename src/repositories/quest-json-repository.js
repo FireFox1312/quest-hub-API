@@ -68,7 +68,7 @@ export class QuestJsonRepository extends RepositoryInterface {
             xp: data.xp ? Number(data.xp) : 0,
             difficulty: data.difficulty,
             completed: typeof data.completed === 'boolean' ? data.completed : false,
-            deleteAt: null
+            deletedAt: null
         };
 
         db.quests.push(newQuest);//Adiciona a nova quest
@@ -81,7 +81,7 @@ export class QuestJsonRepository extends RepositoryInterface {
         const db = await this._readData();
 
         //Filtra as quests que não foram deletadas
-        let filteredQuests = db.quests.filter(quest => quest.deleteAt === null);
+        let filteredQuests = db.quests.filter(quest => quest.deletedAt === null);
 
         //Aplica os filtros de dificuldade
         if (filters.difficulty) {
@@ -120,7 +120,7 @@ export class QuestJsonRepository extends RepositoryInterface {
         //Lê os dados do arquivo JSON
         const db = await this._readData();
         //Busca a quest pelo id
-        const quest = db.quests.find(quest => quest.id === id && quest.deleteAt === null);
+        const quest = db.quests.find(quest => quest.id === id && quest.deletedAt === null);
         
         //Retorna a quest se ela não for deletada, caso contrário retorna null
         return quest || null;
@@ -131,7 +131,7 @@ export class QuestJsonRepository extends RepositoryInterface {
         const db = await this._readData();
 
         //Busca a quest pelo id
-        const questIndex = db.quests.findIndex(quest => quest.id === id && quest.deleteAt === null);
+        const questIndex = db.quests.findIndex(quest => quest.id === id && quest.deletedAt === null);
 
         if (questIndex === -1) {//Se a quest não for encontrada ou estiver deletada, retorna null
             return null;
@@ -159,10 +159,11 @@ export class QuestJsonRepository extends RepositoryInterface {
             return null;
         }
 
-        await this.update(id, { deleteAt: new Date().toISOString() });
+        await this.update(id, { deletedAt: new Date().toISOString() });
 
         return quest;
 
     }
 
 }
+

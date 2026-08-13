@@ -25,7 +25,7 @@ export async function initSqliteDatabase() {
             xp INTEGER DEFAULT 0,
             difficulty TEXT NOT NULL,
             completed BOOLEAN DEFAULT 0,
-            deleteAt TEXT DEFAULT NULL
+            deletedAt TEXT DEFAULT NULL
         );
     `)
 
@@ -34,3 +34,4 @@ export async function initSqliteDatabase() {
     return db;
 
 }
+
