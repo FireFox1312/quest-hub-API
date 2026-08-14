@@ -12,8 +12,26 @@ datasource db {
   provider = "postgresql"
 }
 
+model User {
+  // User info
+  id          String    @id @default(uuid()) @map("user_id")
+  name        String    
+  email       String    @unique
+  password    String    
+
+  // Timestamps
+  deletedAt   DateTime? @map("deleted_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  
+  // Relations
+  quests      Quest[]
+  
+  @@map("users")
+}
+
 model Quest {
-  id          String    @id @default(uuid())
+  id          String    @id @default(uuid()) @map("quest_id")
   title       String
   description String?   
   category    String
@@ -21,11 +39,14 @@ model Quest {
   difficulty  String    @default("easy")
   completed   Boolean   @default(false)
   
-  deleteAt    DateTime? 
-
-  // Timestamps automáticos
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  // Timestamps
+  deletedAt   DateTime? @map("deleted_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
   
+  // Relations
+  userId      String    @map("user_id")
+  user        User      @relation(fields: [userId], references: [id], onDelete: Restrict)
+
   @@map("quests")
 }

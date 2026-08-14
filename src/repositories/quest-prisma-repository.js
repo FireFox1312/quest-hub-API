@@ -17,7 +17,7 @@ export class QuestPrismaRepository extends RepositoryInterface {
 
             where: {
                 id: id,
-                deleteAt: null
+                deletedAt: null
             }
 
         });
@@ -37,7 +37,7 @@ export class QuestPrismaRepository extends RepositoryInterface {
                 xp: data.xp,
                 difficulty: data.difficulty,
                 completed: data.completed || false,
-                deleteAt: null
+                deletedAt: null
             }
 
         });
@@ -60,7 +60,7 @@ export class QuestPrismaRepository extends RepositoryInterface {
                 xp: data.xp,
                 difficulty: data.difficulty,
                 completed: data.completed,
-                deleteAt: data.deleteAt
+                deletedAt: data.deletedAt
             }
 
         });
@@ -70,7 +70,7 @@ export class QuestPrismaRepository extends RepositoryInterface {
     
     async delete(id) {
 
-        const quest = await this.update(id, { deleteAt: new Date() });
+        const quest = await this.update(id, { deletedAt: new Date() });
 
         return quest;
 
@@ -82,7 +82,7 @@ export class QuestPrismaRepository extends RepositoryInterface {
         let questOptions = {
 
             where:{
-                deleteAt: null
+                deletedAt: null
             }
     
         }
@@ -124,4 +124,5 @@ export class QuestPrismaRepository extends RepositoryInterface {
     }
 
 }
+
 

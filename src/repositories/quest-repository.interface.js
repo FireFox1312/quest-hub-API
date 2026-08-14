@@ -70,3 +70,4 @@ export class RepositoryInterface {//Interface que define os métodos que devem s
     }
 
 }
+

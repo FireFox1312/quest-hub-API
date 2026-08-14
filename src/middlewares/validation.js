@@ -40,3 +40,4 @@ export const validate = (schema, property = 'body') => {
 //router.put('/:id', validate({ params: idParamSchema, body: updateQuestSchema }), questController.putControll);
 
 
+

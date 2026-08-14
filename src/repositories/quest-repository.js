@@ -10,7 +10,7 @@ export class QuestRepository extends RepositoryInterface {
     async findAll(filters) {//Método para retornar todas as quests que estejam ativas e aplica filtros, se ouver.
 
         //Filtra as quests que não foram deletadas
-        let objQuest = this.quests.filter((quest) => quest.deleteAt === null);
+        let objQuest = this.quests.filter((quest) => quest.deletedAt === null);
 
         if(filters && filters.difficulty){
             objQuest = objQuest.filter((quest) => quest.difficulty === filters.difficulty);
@@ -57,7 +57,7 @@ export class QuestRepository extends RepositoryInterface {
         if(!objQuest) return null;
 
         //Retorna a quest se ela não for deletada, caso contrário retorna null
-        return objQuest.deleteAt === null ? objQuest : null;
+        return objQuest.deletedAt === null ? objQuest : null;
     }
 
     async create(data) {//Método para criar uma nova quest
@@ -69,7 +69,7 @@ export class QuestRepository extends RepositoryInterface {
             xp: data.xp ? Number(data.xp) : 0,
             difficulty: data.difficulty,
             completed: typeof data.completed === 'boolean' ? data.completed : false,
-            deleteAt: null
+            deletedAt: null
         }
 
         //Adiciona a nova quest no fim do array
@@ -103,8 +103,8 @@ export class QuestRepository extends RepositoryInterface {
         if(objQuest === null){//Verifica se existe no array
             return null;
         }
-        else{//Se existe, chama o método update para alterar a propriedade deleteAt para a data atual
-            return await this.update(id, {deleteAt: new Date().toISOString()});
+        else{//Se existe, chama o método update para alterar a propriedade deletedAt para a data atual
+            return await this.update(id, {deletedAt: new Date().toISOString()});
         }
     }
 

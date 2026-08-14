@@ -22,3 +22,4 @@ router.put('/:id/complete', validate(idParamSchema, 'params'), questController.c
 router.delete('/:id', validate(idParamSchema, 'params'), questController.deleteControll);
 
 export default router;
+

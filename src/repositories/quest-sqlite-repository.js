@@ -19,9 +19,9 @@ export class QuestSqliteRepository extends RepositoryInterface {
     async create(quest) {
 
         //Cria a query de inserção no banco de dados 
-        const query = `INSERT INTO quests (title, description, category, xp, difficulty, completed, deleteAt) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+        const query = `INSERT INTO quests (title, description, category, xp, difficulty, completed, deletedAt) VALUES (?, ?, ?, ?, ?, ?, ?)`;
         //Cria um array com os valores a serem inseridos no banco de dados 
-        const values = [quest.title, quest.description, quest.category, quest.xp, quest.difficulty, quest.completed ? 1 : 0, quest.deleteAt || null];
+        const values = [quest.title, quest.description, quest.category, quest.xp, quest.difficulty, quest.completed ? 1 : 0, quest.deletedAt || null];
 
         const result = await this.db.run(query, values);
 
@@ -33,7 +33,7 @@ export class QuestSqliteRepository extends RepositoryInterface {
     async findById(id) {
 
         //Cria a query de busca no banco de dados SQLite
-        const query = `SELECT * FROM quests WHERE id = ? and deleteAt IS NULL`;
+        const query = `SELECT * FROM quests WHERE id = ? and deletedAt IS NULL`;
         //Cria um array com os valores a serem usados na query de busca no banco de dados
         const values = [id];
 
@@ -62,7 +62,7 @@ export class QuestSqliteRepository extends RepositoryInterface {
         }
 
         //Cria a query de atualização no banco de dados
-        const query = `UPDATE quests SET title = COALESCE(?, title), description = COALESCE(?, description), category = COALESCE(?, category), xp = COALESCE(?, xp), difficulty = COALESCE(?, difficulty), completed = COALESCE(?, completed), deleteAt = COALESCE(?, deleteAt) WHERE id = ?`;
+        const query = `UPDATE quests SET title = COALESCE(?, title), description = COALESCE(?, description), category = COALESCE(?, category), xp = COALESCE(?, xp), difficulty = COALESCE(?, difficulty), completed = COALESCE(?, completed), deletedAt = COALESCE(?, deletedAt) WHERE id = ?`;
 
         //Cria um array com os valores a serem atualizados no banco de dados.
         const values = [
@@ -72,7 +72,7 @@ export class QuestSqliteRepository extends RepositoryInterface {
             data.xp !== undefined ? data.xp : null, 
             data.difficulty !== undefined ? data.difficulty : null, 
             data.completed !== undefined ? Number(data.completed) : null, 
-            data.deleteAt !== undefined ? data.deleteAt : null, 
+            data.deletedAt !== undefined ? data.deletedAt : null, 
             id
         ];
 
@@ -85,16 +85,16 @@ export class QuestSqliteRepository extends RepositoryInterface {
     }
 
     async delete(id) {
-        //Atualiza o campo deleteAt da quest com a data atual, marcando-a como deletada
-        await this.update(id, { deleteAt: new Date().toISOString() });
+        //Atualiza o campo deletedAt da quest com a data atual, marcando-a como deletada
+        await this.update(id, { deletedAt: new Date().toISOString() });
 
     }
 
     async findAll(filters) {
 
         //Cria a query de busca no banco de dados SQLite (usa let pois será reatribuída)
-        let query = `SELECT * FROM quests WHERE deleteAt IS NULL`;
-        let countQuery = `SELECT COUNT(*) as total FROM quests WHERE deleteAt IS NULL`;
+        let query = `SELECT * FROM quests WHERE deletedAt IS NULL`;
+        let countQuery = `SELECT COUNT(*) as total FROM quests WHERE deletedAt IS NULL`;
 
         //Armazena os valores a serem usados na query de busca no banco de dados
         const values = [];
@@ -163,3 +163,4 @@ export class QuestSqliteRepository extends RepositoryInterface {
     }
 
 }
+
