@@ -14,9 +14,6 @@ export class AuthService {
 
         if(user) throw new ConflictError('Email já cadastrado');
 
-        //Futuremente ver esse ponto de softdelete
-        if(user.deletedAt) throw new ConflictError('Email já cadastrado')
-
         const hashedPassword = await bcrypt.hash(data.password, parseInt(process.env.SALT_ROUNDS, 10));
 
         const newUser = await this.userRepository.create({name: data.name, email: data.email, password: hashedPassword});
