@@ -40,8 +40,8 @@ export class QuestController{
 
     //Chama o service pra criar a quest com os dados do body
     postControll = asyncWrapper(async(req, res, next) => {
-        //Quarda as informações do body
-        const data = req.body;
+        //Quarda as informações do body + userId do token
+        const data = { ...req.body, userId: req.user.id };
 
         //Guarda a quest criada pelo service
         const newQuest = await this.questService.create(data);

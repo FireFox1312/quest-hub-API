@@ -1,11 +1,9 @@
 @baseUrl = http://localhost:3000
-
+# ==========================================
+# === 🌐 ROTAS PÚBLICAS ====================
+# ==========================================
 ### 🟢 1. Testar o Ping (Healthcheck)
 GET {{baseUrl}}/ping
-
-# ==========================================
-# === AUTHENTICATION (REGISTER & LOGIN) ====
-# ==========================================
 
 ### 🟢 2. Register (Sucesso - Retorna 201)
 POST {{baseUrl}}/auth/register
@@ -50,7 +48,7 @@ Content-Type: application/json
 }
 
 ### 🟢 6. Login (Sucesso - Retorna 200 + Token)
-# @name loginResponse
+# Após executar, copie o valor do "token" da resposta e cole na variável @token abaixo
 POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
@@ -58,9 +56,6 @@ Content-Type: application/json
   "email": "usuario@email.com",
   "password": "password123"
 }
-
-### 🔑 Variável de Token (Captura o token do login acima para usar no Bloco 5)
-@token = {{loginResponse.response.body.token}}
 
 ### 🔴 7. Login (Erro - Credenciais inválidas - Retorna 401)
 POST {{baseUrl}}/auth/login
@@ -78,17 +73,32 @@ Content-Type: application/json
 {
   "password": "password123"
 }
-
 # ==========================================
-# === QUESTS ===============================
+# === 🛡️ TESTES DE SEGURANÇA (MIDDLEWARE) ==
 # ==========================================
-# Obs: Substitua 'id-da-quest-aqui' por um UUID real gerado no seu banco.
-
-### 🔵 9. Listar todas as Quests (Sem filtros)
+### 🔴 9. Acessar Quests (SEM token - Espera 401)
 GET {{baseUrl}}/quests
 
-### 🟡 10. Criar uma Nova Quest (Sucesso)
+### 🔴 10. Acessar Quests (Token falso/inválido - Espera 401)
+GET {{baseUrl}}/quests
+Authorization: Bearer token_falso_aqui_123
+
+# ==========================================
+# === ⚔️ ROTAS PRIVADAS (QUESTS) ===========
+# ==========================================
+# INSTRUÇÕES:
+# 1. Execute o Login (rota 6) primeiro
+# 2. Copie o valor do "token" da resposta
+# 3. Cole na variável @token abaixo (substituindo o texto)
+# 4. Substitua 'id-da-quest-aqui' por um UUID real do seu banco
+@token = COLE_SEU_TOKEN_AQUI
+### 🔵 11. Listar todas as Quests (Sem filtros)
+GET {{baseUrl}}/quests
+Authorization: Bearer {{token}}
+
+### 🟡 12. Criar uma Nova Quest (Sucesso)
 POST {{baseUrl}}/quests
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
@@ -99,8 +109,9 @@ Content-Type: application/json
   "difficulty": "medium"
 }
 
-### 🔴 11. Criar uma Nova Quest (Erro de Validação)
+### 🔴 13. Criar uma Nova Quest (Erro de Validação)
 POST {{baseUrl}}/quests
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
@@ -109,15 +120,17 @@ Content-Type: application/json
   "difficulty": "invalid_difficulty"
 }
 
-### 🔵 12. Obter Quest por ID (Sucesso)
+### 🔵 14. Obter Quest por ID (Sucesso)
 GET {{baseUrl}}/quests/id-da-quest-aqui
+Authorization: Bearer {{token}}
 
-### 🔴 13. Obter Quest por ID (Erro - Não encontrada)
-# Usando um UUID falso para forçar o erro
+### 🔴 15. Obter Quest por ID (Erro - Não encontrada)
 GET {{baseUrl}}/quests/99999999-9999-9999-9999-999999999999
+Authorization: Bearer {{token}}
 
-### 🟡 14. Atualizar uma Quest (PUT)
+### 🟡 16. Atualizar uma Quest (PUT)
 PUT {{baseUrl}}/quests/id-da-quest-aqui
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
@@ -125,23 +138,32 @@ Content-Type: application/json
   "difficulty": "hard"
 }
 
-### 🟢 15. Completar uma Quest
+### 🟢 17. Completar uma Quest
 PUT {{baseUrl}}/quests/id-da-quest-aqui/complete
+Authorization: Bearer {{token}}
 
-### 🔴 16. Completar uma Quest já completa (Erro de Validação)
+### 🔴 18. Completar uma Quest já completa (Erro de Validação)
 PUT {{baseUrl}}/quests/id-da-quest-aqui/complete
+Authorization: Bearer {{token}}
 
-### 🟣 17. Listar Quests com Filtro (Dificuldade)
+### 🟣 19. Listar Quests com Filtro (Dificuldade)
 GET {{baseUrl}}/quests?difficulty=hard
+Authorization: Bearer {{token}}
 
-### 🟣 18. Listar Quests com Paginação
+### 🟣 20. Listar Quests com Paginação
 GET {{baseUrl}}/quests?page=1&limit=2
+Authorization: Bearer {{token}}
 
-### 🟣 19. Listar Quests (Paginação + Status)
+### 🟣 21. Listar Quests (Paginação + Status)
 GET {{baseUrl}}/quests?completed=true&page=1&limit=5
+Authorization: Bearer {{token}}
 
-### 🟠 20. Deletar uma Quest (Soft Delete)
+### 🟠 22. Deletar uma Quest (Soft Delete)
 DELETE {{baseUrl}}/quests/id-da-quest-aqui
+Authorization: Bearer {{token}}
 
-### 🔴 21. Testar Rota Inexistente (404 Global)
+# ==========================================
+# === 🌐 ROTAS INEXISTENTES ================
+# ==========================================
+### 🔴 23. Testar Rota Inexistente (404 Global)
 GET {{baseUrl}}/rota-inexistente

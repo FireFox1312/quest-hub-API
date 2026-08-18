@@ -30,7 +30,8 @@ export class QuestPrismaRepository extends RepositoryInterface {
                 xp: data.xp,
                 difficulty: data.difficulty,
                 completed: data.completed || false,
-                deletedAt: null
+                deletedAt: null,
+                userId: data.userId
             }
 
         });

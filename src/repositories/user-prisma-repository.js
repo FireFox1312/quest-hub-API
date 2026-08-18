@@ -1,4 +1,4 @@
-import prisma from '../config/prisma.js';
+import prisma from '../database/prisma-client.js';
 
 export class UserPrismaRepository {
 
