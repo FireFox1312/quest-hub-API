@@ -3,10 +3,91 @@
 ### 🟢 1. Testar o Ping (Healthcheck)
 GET {{baseUrl}}/ping
 
-### 🔵 2. Listar todas as Quests (Sem filtros)
+# ==========================================
+# === AUTHENTICATION (REGISTER & LOGIN) ====
+# ==========================================
+
+### 🟢 2. Register (Sucesso - Retorna 201)
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "Novo Usuário",
+  "email": "usuario@email.com",
+  "password": "password123"
+}
+
+### 🔴 3. Register (Erro - Email já existente - Retorna 409)
+# Execute duas vezes para ver o erro
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "Novo Usuário",
+  "email": "usuario@email.com",
+  "password": "password123"
+}
+
+### 🔴 4. Register (Erro de Validação - Zod rejeita - Retorna 400)
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "Ab",
+  "email": "email-invalido",
+  "password": "123"
+}
+
+### 🔴 5. Register (Erro Strict - Campo extra - Retorna 400)
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "Admin",
+  "email": "admin@email.com",
+  "password": "password123",
+  "isAdmin": true
+}
+
+### 🟢 6. Login (Sucesso - Retorna 200 + Token)
+# @name loginResponse
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "usuario@email.com",
+  "password": "password123"
+}
+
+### 🔑 Variável de Token (Captura o token do login acima para usar no Bloco 5)
+@token = {{loginResponse.response.body.token}}
+
+### 🔴 7. Login (Erro - Credenciais inválidas - Retorna 401)
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "usuario@email.com",
+  "password": "senhaerrada"
+}
+
+### 🔴 8. Login (Erro de Validação - Falta campo - Retorna 400)
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "password": "password123"
+}
+
+# ==========================================
+# === QUESTS ===============================
+# ==========================================
+# Obs: Substitua 'id-da-quest-aqui' por um UUID real gerado no seu banco.
+
+### 🔵 9. Listar todas as Quests (Sem filtros)
 GET {{baseUrl}}/quests
 
-### 🟡 3. Criar uma Nova Quest (Sucesso)
+### 🟡 10. Criar uma Nova Quest (Sucesso)
 POST {{baseUrl}}/quests
 Content-Type: application/json
 
@@ -18,7 +99,7 @@ Content-Type: application/json
   "difficulty": "medium"
 }
 
-### 🔴 4. Criar uma Nova Quest (Erro de Validação)
+### 🔴 11. Criar uma Nova Quest (Erro de Validação)
 POST {{baseUrl}}/quests
 Content-Type: application/json
 
@@ -28,38 +109,39 @@ Content-Type: application/json
   "difficulty": "invalid_difficulty"
 }
 
-### 🔵 5. Obter Quest por ID (Sucesso)
-GET {{baseUrl}}/quests/1
+### 🔵 12. Obter Quest por ID (Sucesso)
+GET {{baseUrl}}/quests/id-da-quest-aqui
 
-### 🔴 6. Obter Quest por ID (Erro - Não encontrada)
-GET {{baseUrl}}/quests/999
+### 🔴 13. Obter Quest por ID (Erro - Não encontrada)
+# Usando um UUID falso para forçar o erro
+GET {{baseUrl}}/quests/99999999-9999-9999-9999-999999999999
 
-### 🟡 7. Atualizar uma Quest (PUT)
-PUT {{baseUrl}}/quests/1
+### 🟡 14. Atualizar uma Quest (PUT)
+PUT {{baseUrl}}/quests/id-da-quest-aqui
 Content-Type: application/json
 
 {
-  "title": "Aprender Persistência e SQLite",
+  "title": "Aprender Persistência e PostgreSQL",
   "difficulty": "hard"
 }
 
-### 🟢 8. Completar uma Quest
-PUT {{baseUrl}}/quests/1/complete
+### 🟢 15. Completar uma Quest
+PUT {{baseUrl}}/quests/id-da-quest-aqui/complete
 
-### 🔴 9. Completar uma Quest já completa (Erro de Validação)
-PUT {{baseUrl}}/quests/1/complete
+### 🔴 16. Completar uma Quest já completa (Erro de Validação)
+PUT {{baseUrl}}/quests/id-da-quest-aqui/complete
 
-### 🟣 10. Listar Quests com Filtro (Dificuldade)
+### 🟣 17. Listar Quests com Filtro (Dificuldade)
 GET {{baseUrl}}/quests?difficulty=hard
 
-### 🟣 11. Listar Quests com Paginação
+### 🟣 18. Listar Quests com Paginação
 GET {{baseUrl}}/quests?page=1&limit=2
 
-### 🟣 12. Listar Quests (Paginação + Status)
+### 🟣 19. Listar Quests (Paginação + Status)
 GET {{baseUrl}}/quests?completed=true&page=1&limit=5
 
-### 🟠 13. Deletar uma Quest (Soft Delete)
-DELETE {{baseUrl}}/quests/1
+### 🟠 20. Deletar uma Quest (Soft Delete)
+DELETE {{baseUrl}}/quests/id-da-quest-aqui
 
-### 🔴 14. Testar Rota Inexistente (404 Global)
+### 🔴 21. Testar Rota Inexistente (404 Global)
 GET {{baseUrl}}/rota-inexistente

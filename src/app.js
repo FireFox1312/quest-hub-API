@@ -1,5 +1,6 @@
 //Importação do express e do arquivo de rotas
 import express from 'express';
+import authRoute from './routes/auth-route.js';
 import questRoute from './routes/quest-route.js';
 import { logger } from './middlewares/logger.js';
 import { notFound } from './middlewares/not-found.js';
@@ -27,6 +28,9 @@ app.use(logger);
 
 //Utiliza o middleware antes das rotas
 app.use(cors(corsOptions));
+
+// //Rota para o endpoint /auth, que vai usar o router definido no arquivo auth-routes.js
+app.use('/auth', authRoute);
 
 //Rota para o endpoint /quests, que vai usar o router definido no arquivo quest-route.js
 app.use('/quests', questRoute);
