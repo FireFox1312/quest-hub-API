@@ -7,6 +7,7 @@ import { notFound } from './middlewares/not-found.js';
 import { errorHandler } from './middlewares/error-handle.js';
 import helmet from 'helmet';
 import cors from 'cors';
+import { authMiddleware } from './middlewares/auth.js';
 
 //Configuração do CORS
 const corsOptions = {
@@ -32,13 +33,17 @@ app.use(cors(corsOptions));
 // //Rota para o endpoint /auth, que vai usar o router definido no arquivo auth-routes.js
 app.use('/auth', authRoute);
 
-//Rota para o endpoint /quests, que vai usar o router definido no arquivo quest-route.js
-app.use('/quests', questRoute);
-
 //Rota de Ping
 app.get('/ping', (req,res)=>{
     res.status(200).json({status: 'OK'});
 });
+
+// Adiciona o middleware de autenticação antes das rotas que precisam de autenticação
+app.use(authMiddleware); 
+
+//Rota para o endpoint /quests, que vai usar o router definido no arquivo quest-route.js
+app.use('/quests', questRoute);
+
 
 //Se passar por tudo chama o middleware responsável pelo erro de rota não encontrada
 app.use(notFound);
