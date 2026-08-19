@@ -167,3 +167,56 @@ Authorization: Bearer {{token}}
 # ==========================================
 ### 🔴 23. Testar Rota Inexistente (404 Global)
 GET {{baseUrl}}/rota-inexistente
+
+# ==========================================
+# === 🛡️ TESTES DE AUTORIZAÇÃO (BLOCO 6) ==
+# ==========================================
+# INSTRUÇÕES:
+# 1. Registre 2 usuários diferentes (rotas 2 e X)
+# 2. Faça login com o Usuário 1 e crie uma quest
+# 3. Anote o ID da quest criada
+# 4. Faça login com o Usuário 2 e cole o token na variável @tokenUser2
+# 5. Tente acessar/editar/deletar a quest do Usuário 1 com o token do Usuário 2
+
+### 🟢 Registrar Usuário 2
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "Segundo Usuário",
+  "email": "usuario2@email.com",
+  "password": "password456"
+}
+
+### 🟢 Login Usuário 2
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "usuario2@email.com",
+  "password": "password456"
+}
+
+### 🟢 🔑
+@tokenUser2 = COLE_TOKEN_DO_USUARIO_2_AQUI
+
+### 🔴 Buscar quest do Usuário 1 com token do Usuário 2 (Espera 403)
+GET {{baseUrl}}/quests/ID_DA_QUEST_DO_USUARIO_1
+Authorization: Bearer {{tokenUser2}}
+
+### 🔴 Atualizar quest do Usuário 1 com token do Usuário 2 (Espera 403)
+PUT {{baseUrl}}/quests/ID_DA_QUEST_DO_USUARIO_1
+Authorization: Bearer {{tokenUser2}}
+Content-Type: application/json
+
+{
+  "title": "Tentativa de invasão!"
+}
+
+### 🔴 Deletar quest do Usuário 1 com token do Usuário 2 (Espera 403)
+DELETE {{baseUrl}}/quests/ID_DA_QUEST_DO_USUARIO_1
+Authorization: Bearer {{tokenUser2}}
+
+### 🟢 Listar quests com Usuário 2 (Deve retornar lista VAZIA)
+GET {{baseUrl}}/quests
+Authorization: Bearer {{tokenUser2}}
