@@ -13,7 +13,7 @@ export class QuestController{
     //Chama o service pra retornar a lista
     getControll = asyncWrapper(async(req, res) => {
         //Guarda os filtros passados na URL
-        const filters = req.query;
+        const filters = req.query ;
 
         const page = req.query.page ? parseInt(req.query.page, 10) : 1;
 
@@ -21,6 +21,9 @@ export class QuestController{
 
         filters.page = page;
         filters.limit = limit;
+
+        //Adiciona o userId do token aos filtros para que o service busque apenas quests do usuário logado
+        filters.userId = req.user.id;
 
         //Guarda a lista retornada pelo service
         const questList = await this.questService.getAll(filters);
