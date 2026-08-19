@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.0](https://github.com/FireFox1312/quest-hub-API/compare/v0.6.5...v0.7.0) (2026-08-19)
+
+
+### Features
+
+* **auth:** add auth controller, routes, and REST Client test scenarios ([5aca312](https://github.com/FireFox1312/quest-hub-API/commit/5aca312326ef971933f4b336c7132a4c1eeaca80))
+* **auth:** add register and login validation schemas with Zod ([d5d7723](https://github.com/FireFox1312/quest-hub-API/commit/d5d77232ea434eade2a073bc3d5fa8526dad0ae7))
+* **auth:** configure JWT environment and add UnauthorizedError class ([9e1ff29](https://github.com/FireFox1312/quest-hub-API/commit/9e1ff291cb02e09def2dd7b47dea9404697f55da))
+* **auth:** implement AuthService with register and login logic ([c15566b](https://github.com/FireFox1312/quest-hub-API/commit/c15566bb788d3c2daacd870cbfc461061e6c148c))
+* **auth:** implement JWT middleware to protect private routes ([70909d3](https://github.com/FireFox1312/quest-hub-API/commit/70909d38d77fce76290eb43414ce199cb267bc1b))
+* **prisma:** add User model and 1:N relationship with Quest ([831b99c](https://github.com/FireFox1312/quest-hub-API/commit/831b99c8fd5bfb6f2625c3ee84c001af55923dbf))
+* **quest:** bind user ID on quest creation and fix search parameter ([ff2e4fe](https://github.com/FireFox1312/quest-hub-API/commit/ff2e4fee2fc0416961eb779f11f7bc8298393297))
+
+
+### Bug Fixes
+
+* **auth:** remove unreachable soft-delete check in register method ([9408d6d](https://github.com/FireFox1312/quest-hub-API/commit/9408d6d29b05130ff60d0688ad4826b21eed81c9))
+* **auth:** update prisma client import path in user repository ([bfe43e2](https://github.com/FireFox1312/quest-hub-API/commit/bfe43e2c9d0e61d4d12dbddd1c7be01e2366ea1e))
+* **prisma:** correct PrismaPg import path in shared client ([ea214e4](https://github.com/FireFox1312/quest-hub-API/commit/ea214e4773879b5fcf4be04527aba9d7393fc0da))
+* **schema:** update idParamSchema to validate UUID instead of number ([ba09561](https://github.com/FireFox1312/quest-hub-API/commit/ba0956112dac62d163311c8778ea5344f465e0a1))
+
 ### [0.6.5](https://github.com/FireFox1312/quest-hub-API/compare/v0.6.0...v0.6.5) (2026-08-11)
 
 
