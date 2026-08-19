@@ -81,6 +81,10 @@ export class QuestPrismaRepository extends RepositoryInterface {
     
         }
 
+        if (filters.userId){//Se houver filtro de usuário, adiciona ao objeto de opções
+            questOptions.where.userId = filters.userId;
+        }
+
         if (filters.difficulty) {//Se houver filtro de dificuldade, adiciona ao objeto de opções
             questOptions.where.difficulty = filters.difficulty;
 
