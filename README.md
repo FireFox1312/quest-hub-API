@@ -15,14 +15,14 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 
 ---
 
-## 🚀 Status Atual: `Sprint 8` (Em Andamento) — Autenticação e Autorização com JWT
+## 🚀 Status Atual: `Sprint 8` (Concluída) — Autenticação e Autorização com JWT
 > ⚙️ **Foco da Sprint**: Implementar sistema de usuários, proteger rotas e isolar dados. Os usuários podem se cadastrar, fazer login (recebendo um JWT) e interagir de forma segura com as Quests.
 - [x] Bloco 1: Fundação: Modelo User + Migration
 - [x] Bloco 2: Camada de Dados: User Repository + Schemas Zod
 - [x] Bloco 3: Regra de Negócio: Auth Service (Register + Login)
 - [x] Bloco 4: Camada de Entrada: Auth Controller + Rotas Públicas
 - [x] Bloco 5: Middleware de Autenticação (Proteger Rotas)
-- [ ] Bloco 6: Filtro por Usuário (Autorização)
+- [x] Bloco 6: Filtro por Usuário (Autorização)
 
 ---
 
@@ -38,8 +38,8 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 | ✅ | **Sprint 5** | Sistema padronizado de Tratamento de Erros (AppError) e Helmet |
 | ✅ | **Sprint 6** | Persistência Local: Migração para JSON e banco relacional com SQLite nativo |
 | ✅ | **Sprint 7** | Banco de Dados Profissional: PostgreSQL, Prisma ORM e Fábrica de Repositórios (Injeção Dinâmica) |
-| 🟨 | **Sprint 8** | Autenticação, Cadastro, Login, Hash de Senhas (Bcrypt), Proteção de Rotas com JWT e Autorização |
-| ⬜ | **Sprint 9** | Segurança Avançada, CORS, Helmet refinado, Rate Limit e proteções diversas |
+| ✅ | **Sprint 8** | Autenticação, Cadastro, Login, Hash de Senhas (Bcrypt), Proteção de Rotas com JWT e Autorização |
+| 🟨 | **Sprint 9** | Segurança Avançada, CORS, Helmet refinado, Rate Limit e proteções diversas |
 | ⬜ | **Sprint 10** | Documentação via Swagger/OpenAPI |
 | ⬜ | **Sprint 11** | Middlewares próprios de logging e tempo de resposta |
 | ⬜ | **Sprint 12** | Testes Unitários e de Integração |
