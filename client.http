@@ -91,7 +91,10 @@ Authorization: Bearer token_falso_aqui_123
 # 2. Copie o valor do "token" da resposta
 # 3. Cole na variável @token abaixo (substituindo o texto)
 # 4. Substitua 'id-da-quest-aqui' por um UUID real do seu banco
-@token = COLE_SEU_TOKEN_AQUI
+
+# COLE_SEU_TOKEN_AQUI
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIyMjhiYWMzLTQwOGUtNGI0MS1hNDkyLWU5ZTg5YjU3YTMzNSIsImVtYWlsIjoidXN1YXJpb0BlbWFpbC5jb20iLCJpYXQiOjE3ODcxNTE2MjIsImV4cCI6MTc4NzIzODAyMn0.GxIsgrXCmPAtB94GkPqxc1FaXcXFXrba4zeVCG-0h50
+
 ### 🔵 11. Listar todas as Quests (Sem filtros)
 GET {{baseUrl}}/quests
 Authorization: Bearer {{token}}
@@ -167,3 +170,56 @@ Authorization: Bearer {{token}}
 # ==========================================
 ### 🔴 23. Testar Rota Inexistente (404 Global)
 GET {{baseUrl}}/rota-inexistente
+
+# ==========================================
+# === 🛡️ TESTES DE AUTORIZAÇÃO (BLOCO 6) ==
+# ==========================================
+# INSTRUÇÕES:
+# 1. Registre 2 usuários diferentes (rotas 2 e X)
+# 2. Faça login com o Usuário 1 e crie uma quest
+# 3. Anote o ID da quest criada
+# 4. Faça login com o Usuário 2 e cole o token na variável @tokenUser2
+# 5. Tente acessar/editar/deletar a quest do Usuário 1 com o token do Usuário 2
+
+### 🟢 Registrar Usuário 2
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "Segundo Usuário",
+  "email": "usuario2@email.com",
+  "password": "password456"
+}
+
+### 🟢 Login Usuário 2
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "usuario2@email.com",
+  "password": "password456"
+}
+
+### 🟢 🔑
+@tokenUser2 = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRmNTk5NGU4LWNhNWUtNDVkZC1hNGJhLTY4MTBjMDMwMTRkNyIsImVtYWlsIjoidXN1YXJpbzJAZW1haWwuY29tIiwiaWF0IjoxNzg3MTUxNTczLCJleHAiOjE3ODcyMzc5NzN9.Itq3XX63T6q8qHLCG1YEaXqQmlvEs3X8zDSUIZfC1QQ
+
+### 🔴 Buscar quest do Usuário 1 com token do Usuário 2 (Espera 403)
+GET {{baseUrl}}/quests/339e37a4-f9c7-408a-a128-c53067e77ab1
+Authorization: Bearer {{tokenUser2}}
+
+### 🔴 Atualizar quest do Usuário 1 com token do Usuário 2 (Espera 403)
+PUT {{baseUrl}}/quests/339e37a4-f9c7-408a-a128-c53067e77ab1
+Authorization: Bearer {{tokenUser2}}
+Content-Type: application/json
+
+{
+  "title": "Tentativa de invasão!"
+}
+
+### 🔴 Deletar quest do Usuário 1 com token do Usuário 2 (Espera 403)
+DELETE {{baseUrl}}/quests/339e37a4-f9c7-408a-a128-c53067e77ab1
+Authorization: Bearer {{tokenUser2}}
+
+### 🟢 Listar quests com Usuário 2 (Deve retornar lista VAZIA)
+GET {{baseUrl}}/quests
+Authorization: Bearer {{tokenUser2}}
