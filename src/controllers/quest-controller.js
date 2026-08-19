@@ -33,7 +33,7 @@ export class QuestController{
         const id = req.params.id;
 
         //Guarda a quest retornada pelo service
-        const quest = await this.questService.getById(id);
+        const quest = await this.questService.getById(id, req.user.id);
         res.status(200).json(quest);
         
     })
@@ -57,7 +57,7 @@ export class QuestController{
         const data = req.body;
         
         //Guarda a quest atualizada pelo service
-        const updatedQuest = await this.questService.update(id, data);
+        const updatedQuest = await this.questService.update(id, data, req.user.id);
         res.status(200).json(updatedQuest);
         
     })
@@ -68,7 +68,7 @@ export class QuestController{
         const id = req.params.id;
         
         //Guarda a quest completada pelo service
-        const completedQuest = await this.questService.complete(id);
+        const completedQuest = await this.questService.complete(id, req.user.id);
         res.status(200).json(completedQuest);
         
     })
@@ -77,7 +77,8 @@ export class QuestController{
         //Pega o id já validado pelo middleware de validação de id
         const id = req.params.id;
        
-        const deletedQuest = await this.questService.delete(id);
+        //"Deleta" a quest pelo service (soft delete)
+        const deletedQuest = await this.questService.delete(id, req.user.id);
             
         res.status(204).send();
     
