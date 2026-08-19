@@ -1,6 +1,23 @@
-import { AppError, NotFoundError, ValidationError, ConflictError } from "../utils/app-error.js";
+import { AppError, NotFoundError, ValidationError, ConflictError, ForbiddenError } from "../utils/app-error.js";
 
 export class QuestService {
+
+    async _ensureOwnership(questId, userId) {
+
+        const quest = await this.questRepository.findById(questId);
+
+        if (!quest) {
+            throw new NotFoundError('Quest não encontrada');
+        }
+
+        if (quest.userId !== userId) {
+            throw new ForbiddenError('Acesso negado');
+        }
+
+        return quest;
+
+    }
+
     constructor(questRepository) {
         //Iniciando a propriedade questRepository
         this.questRepository = questRepository;
@@ -11,9 +28,9 @@ export class QuestService {
     }
 
     //Retorna a quest pelo id
-    async getById(id) {
-        //Busca pelo id e guarda a quest
-        const quest =  await this.questRepository.findById(id);
+    async getById(id, userId) {
+        
+        const quest = await this._ensureOwnership(id, userId)
 
         //Verifica se existe, se não existe lança um erro
         if(!quest) throw new NotFoundError('Quest não encontrada');
@@ -29,18 +46,18 @@ export class QuestService {
     }
 
     //Faz o update de uma quest
-    async update(id, data){
+    async update(id, data, userId) {
         //Busca a quest pelo id
-        const quest = await this.getById(id);
+        const quest = await this._ensureOwnership(id, userId);
 
         //Retorna a quest atualizada
         return await this.questRepository.update(quest.id, data);
     }
 
     //Altera para completa a quest passada
-    async complete(id){
+    async complete(id, userId) {
         //Busca a quest pelo id
-        const quest = await this.getById(id);
+        const quest = await this._ensureOwnership(id, userId);
 
         if(quest.completed){//Verifica se já está completada
             throw new ValidationError('Quest já completada');
@@ -49,9 +66,9 @@ export class QuestService {
         return await this.questRepository.update(quest.id, {completed: true});
     }
 
-    async delete(id){
+    async delete(id, userId){
         //Busca a quest pelo id
-        const quest = await this.getById(id);
+        const quest = await this._ensureOwnership(id, userId);
 
         return await this.questRepository.delete(quest.id);
         

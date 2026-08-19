@@ -13,7 +13,7 @@ export class QuestController{
     //Chama o service pra retornar a lista
     getControll = asyncWrapper(async(req, res) => {
         //Guarda os filtros passados na URL
-        const filters = req.query;
+        const filters = req.query ;
 
         const page = req.query.page ? parseInt(req.query.page, 10) : 1;
 
@@ -21,6 +21,9 @@ export class QuestController{
 
         filters.page = page;
         filters.limit = limit;
+
+        //Adiciona o userId do token aos filtros para que o service busque apenas quests do usuário logado
+        filters.userId = req.user.id;
 
         //Guarda a lista retornada pelo service
         const questList = await this.questService.getAll(filters);
@@ -33,7 +36,7 @@ export class QuestController{
         const id = req.params.id;
 
         //Guarda a quest retornada pelo service
-        const quest = await this.questService.getById(id);
+        const quest = await this.questService.getById(id, req.user.id);
         res.status(200).json(quest);
         
     })
@@ -57,7 +60,7 @@ export class QuestController{
         const data = req.body;
         
         //Guarda a quest atualizada pelo service
-        const updatedQuest = await this.questService.update(id, data);
+        const updatedQuest = await this.questService.update(id, data, req.user.id);
         res.status(200).json(updatedQuest);
         
     })
@@ -68,7 +71,7 @@ export class QuestController{
         const id = req.params.id;
         
         //Guarda a quest completada pelo service
-        const completedQuest = await this.questService.complete(id);
+        const completedQuest = await this.questService.complete(id, req.user.id);
         res.status(200).json(completedQuest);
         
     })
@@ -77,7 +80,8 @@ export class QuestController{
         //Pega o id já validado pelo middleware de validação de id
         const id = req.params.id;
        
-        const deletedQuest = await this.questService.delete(id);
+        //"Deleta" a quest pelo service (soft delete)
+        const deletedQuest = await this.questService.delete(id, req.user.id);
             
         res.status(204).send();
     
