@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Node.js-v24.18.0-green?style=for-the-badge&logo=node.js" alt="Node.js Version" />
-  <img src="https://img.shields.io/badge/Sprint%20Conclu%C3%ADda-Sprint%208-brightgreen?style=for-the-badge&logo=git" alt="Sprint 8 Concluída" />
+  <img src="https://img.shields.io/badge/Sprint%20Atual-Sprint%209-blue?style=for-the-badge&logo=git" alt="Sprint 9 Em Andamento" />
   <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License" />
 </p>
 
@@ -15,14 +15,13 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 
 ---
 
-## 🚀 Status Atual: `Sprint 8` (Concluída) — Autenticação e Autorização com JWT
-> ⚙️ **Foco da Sprint**: Implementar sistema de usuários, proteger rotas e isolar dados. Os usuários podem se cadastrar, fazer login (recebendo um JWT) e interagir de forma segura com as Quests.
-- [x] Bloco 1: Fundação: Modelo User + Migration
-- [x] Bloco 2: Camada de Dados: User Repository + Schemas Zod
-- [x] Bloco 3: Regra de Negócio: Auth Service (Register + Login)
-- [x] Bloco 4: Camada de Entrada: Auth Controller + Rotas Públicas
-- [x] Bloco 5: Middleware de Autenticação (Proteger Rotas)
-- [x] Bloco 6: Filtro por Usuário (Autorização)
+## 🚀 Status Atual: `Sprint 9` (Em Andamento) — Segurança Avançada
+> ⚙️ **Foco da Sprint**: Endurecer a segurança da API — CORS restritivo, Helmet refinado, Rate Limiting, Password Strength, Granular JWT Errors, Security Testing e validação de variáveis de ambiente.
+- [ ] Bloco 1: CORS Restritivo + Password Strength Policy
+- [ ] Bloco 2: Helmet a Fundo + Granular JWT Error Handling
+- [ ] Bloco 3: Rate Limiting + Desafio Diferenciado (GET vs POST)
+- [ ] Bloco 4: Segurança Teórica (SQL Injection, XSS, CSRF)
+- [ ] Bloco 5: Env Validation + Security Tests + Hardening Final
 
 ---
 
