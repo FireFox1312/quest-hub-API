@@ -223,3 +223,14 @@ Authorization: Bearer {{tokenUser2}}
 ### 🟢 Listar quests com Usuário 2 (Deve retornar lista VAZIA)
 GET {{baseUrl}}/quests
 Authorization: Bearer {{tokenUser2}}
+
+### 🔵 CORS — Origem Permitida (Preflight OPTIONS)
+OPTIONS http://localhost:3000/quests
+Origin: http://localhost:5173
+Access-Control-Request-Method: GET
+Access-Control-Request-Headers: Authorization
+
+### 🔴 CORS — Origem Bloqueada
+OPTIONS http://localhost:3000/quests
+Origin: https://site-malicioso.com
+Access-Control-Request-Method: GET

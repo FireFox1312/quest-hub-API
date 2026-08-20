@@ -8,11 +8,27 @@ import { errorHandler } from './middlewares/error-handle.js';
 import helmet from 'helmet';
 import cors from 'cors';
 import { authMiddleware } from './middlewares/auth.js';
+import 'dotenv/config';
 
 //Configuração do CORS
+
+const allowedOrigins = process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',').map(origin => origin.trim()) : [];
+
+
 const corsOptions = {
-    origin: '*', // Permitir todas as origens
+    origin: (origin, callback) => {
+
+        if (!origin || allowedOrigins.includes(origin)) {// Permite requisições sem origem (Postman, curl, etc.) ou se a origem estiver na lista de permitidas
+            callback(null, true);
+        }
+        else {
+            callback(new Error('Not allowed by CORS'));
+        }
+
+    }, // Origens permitidas
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
+    allowedHeaders: ['Content-Type', 'Authorization'], // Cabeçalhos permitidos
+    optionsSuccessStatus: 200 // Status de sucesso para requisições OPTIONS
 };
 
 //Objeto que vai conter todos o métodos do express
