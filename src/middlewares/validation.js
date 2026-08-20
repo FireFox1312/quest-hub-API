@@ -14,7 +14,7 @@ export const validate = (schema, property = 'body') => {
             //Em caso de erro, retorna a resposta com a mensagem e o campo inválido
             return res.status(400).json({
                 message: 'Erro de validação de dados',
-                issues: error.errors
+                issues: error.issues
             });
         }
     }

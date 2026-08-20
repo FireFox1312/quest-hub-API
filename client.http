@@ -234,3 +234,37 @@ Access-Control-Request-Headers: Authorization
 OPTIONS http://localhost:3000/quests
 Origin: https://site-malicioso.com
 Access-Control-Request-Method: GET
+
+# ==========================================
+# ===     🛡️ TESTES DE SEGURANÇA         ==
+# ==========================================
+
+### 🔴 Register — Senha fraca (sem maiúscula)
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "name": "Teste Senha",
+    "email": "senha@test.com",
+    "password": "abcd1234!"
+}
+
+### 🔴 Register — Senha fraca (sem número)
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "name": "Teste Senha",
+    "email": "senha@test.com",
+    "password": "Abcdefgh!"
+}
+
+### 🟢 Register — Senha forte (todos os critérios)
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "name": "Teste Senha",
+    "email": "senha@test.com",
+    "password": "MinhaSenh@123"
+}
