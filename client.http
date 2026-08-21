@@ -1,32 +1,70 @@
+# ==============================================================================
+# 🎮 QUESTHUB API — CLIENT REST (TESTES DE ROTAS & SEGURANÇA)
+# ==============================================================================
+# Uso: Extensão "REST Client" no VSCode (clique em "Send Request" acima de cada rota)
+
+# ==============================================================================
+# ⚙️ CONFIGURAÇÕES & VARIÁVEIS GLOBAIS
+# ==============================================================================
 @baseUrl = http://localhost:3000
-# ==========================================
-# === 🌐 ROTAS PÚBLICAS ====================
-# ==========================================
-### 🟢 1. Testar o Ping (Healthcheck)
+
+# 🔑 Token do Usuário 1 (usuario@email.com)
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIyMjhiYWMzLTQwOGUtNGI0MS1hNDkyLWU5ZTg5YjU3YTMzNSIsImVtYWlsIjoidXN1YXJpb0BlbWFpbC5jb20iLCJpYXQiOjE3ODcxNTE2MjIsImV4cCI6MTc4NzIzODAyMn0.GxIsgrXCmPAtB94GkPqxc1FaXcXFXrba4zeVCG-0h50
+
+# 🔑 Token do Usuário 2 (usuario2@email.com)
+@tokenUser2 = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRmNTk5NGU4LWNhNWUtNDVkZC1hNGJhLTY4MTBjMDMwMTRkNyIsImVtYWlsIjoidXN1YXJpbzJAZW1haWwuY29tIiwiaWF0IjoxNzg3MTUxNTczLCJleHAiOjE3ODcyMzc5NzN9.Itq3XX63T6q8qHLCG1YEaXqQmlvEs3X8zDSUIZfC1QQ
+
+# 🆔 ID de Quest para Testes Individuais (Substitua por um ID real do seu banco se necessário)
+@questId = 339e37a4-f9c7-408a-a128-c53067e77ab1
+
+
+# ==============================================================================
+# 🌐 1. INFRAESTRUTURA & HEALTHCHECK
+# ==============================================================================
+
+### 🟢 1.1 Ping (Status da API)
 GET {{baseUrl}}/ping
 
-### 🟢 2. Register (Sucesso - Retorna 201)
+### 🔴 1.2 Rota Inexistente (Fallback 404 Not Found)
+GET {{baseUrl}}/rota-inexistente
+
+
+# ==============================================================================
+# 👤 2. AUTENTICAÇÃO (CADASTRO & LOGIN)
+# ==============================================================================
+
+### 🟢 2.1 Register — Usuário 1 (Sucesso - Retorna 201)
 POST {{baseUrl}}/auth/register
 Content-Type: application/json
 
 {
   "name": "Novo Usuário",
   "email": "usuario@email.com",
-  "password": "password123"
+  "password": "MinhaSenh@123"
 }
 
-### 🔴 3. Register (Erro - Email já existente - Retorna 409)
-# Execute duas vezes para ver o erro
+### 🟢 2.2 Register — Usuário 2 (Sucesso - Retorna 201)
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "Segundo Usuário",
+  "email": "usuario2@email.com",
+  "password": "MinhaSenh@456"
+}
+
+### 🔴 2.3 Register — Email Duplicado (Retorna 409 Conflict)
+# Execute duas vezes o cadastro com o mesmo email
 POST {{baseUrl}}/auth/register
 Content-Type: application/json
 
 {
   "name": "Novo Usuário",
   "email": "usuario@email.com",
-  "password": "password123"
+  "password": "MinhaSenh@123"
 }
 
-### 🔴 4. Register (Erro de Validação - Zod rejeita - Retorna 400)
+### 🔴 2.4 Register — Erro de Validação Genérica (Retorna 400 Bad Request)
 POST {{baseUrl}}/auth/register
 Content-Type: application/json
 
@@ -36,70 +74,62 @@ Content-Type: application/json
   "password": "123"
 }
 
-### 🔴 5. Register (Erro Strict - Campo extra - Retorna 400)
+### 🔴 2.5 Register — Erro Strict / Campo Extra Não Permitido (Retorna 400)
 POST {{baseUrl}}/auth/register
 Content-Type: application/json
 
 {
   "name": "Admin",
   "email": "admin@email.com",
-  "password": "password123",
+  "password": "MinhaSenh@123",
   "isAdmin": true
 }
 
-### 🟢 6. Login (Sucesso - Retorna 200 + Token)
-# Após executar, copie o valor do "token" da resposta e cole na variável @token abaixo
+### 🟢 2.6 Login — Usuário 1 (Sucesso - Retorna 200 + Token)
 POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
 {
   "email": "usuario@email.com",
-  "password": "password123"
+  "password": "MinhaSenh@123"
 }
 
-### 🔴 7. Login (Erro - Credenciais inválidas - Retorna 401)
+### 🟢 2.7 Login — Usuário 2 (Sucesso - Retorna 200 + Token)
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "usuario2@email.com",
+  "password": "MinhaSenh@456"
+}
+
+### 🔴 2.8 Login — Credenciais Inválidas (Retorna 401 Unauthorized)
 POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
 {
   "email": "usuario@email.com",
-  "password": "senhaerrada"
+  "password": "SenhaErrada123!"
 }
 
-### 🔴 8. Login (Erro de Validação - Falta campo - Retorna 400)
+### 🔴 2.9 Login — Validação Zod / Campo Faltando (Retorna 400)
 POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
 {
-  "password": "password123"
+  "password": "MinhaSenh@123"
 }
-# ==========================================
-# === 🛡️ TESTES DE SEGURANÇA (MIDDLEWARE) ==
-# ==========================================
-### 🔴 9. Acessar Quests (SEM token - Espera 401)
-GET {{baseUrl}}/quests
 
-### 🔴 10. Acessar Quests (Token falso/inválido - Espera 401)
-GET {{baseUrl}}/quests
-Authorization: Bearer token_falso_aqui_123
 
-# ==========================================
-# === ⚔️ ROTAS PRIVADAS (QUESTS) ===========
-# ==========================================
-# INSTRUÇÕES:
-# 1. Execute o Login (rota 6) primeiro
-# 2. Copie o valor do "token" da resposta
-# 3. Cole na variável @token abaixo (substituindo o texto)
-# 4. Substitua 'id-da-quest-aqui' por um UUID real do seu banco
+# ==============================================================================
+# ⚔️ 3. ROTAS PRIVADAS (QUESTS CRUD & FILTROS)
+# ==============================================================================
 
-# COLE_SEU_TOKEN_AQUI
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIyMjhiYWMzLTQwOGUtNGI0MS1hNDkyLWU5ZTg5YjU3YTMzNSIsImVtYWlsIjoidXN1YXJpb0BlbWFpbC5jb20iLCJpYXQiOjE3ODcxNTE2MjIsImV4cCI6MTc4NzIzODAyMn0.GxIsgrXCmPAtB94GkPqxc1FaXcXFXrba4zeVCG-0h50
-
-### 🔵 11. Listar todas as Quests (Sem filtros)
+### 🔵 3.1 Listar Todas as Quests do Usuário Logado
 GET {{baseUrl}}/quests
 Authorization: Bearer {{token}}
 
-### 🟡 12. Criar uma Nova Quest (Sucesso)
+### 🟡 3.2 Criar Nova Quest (Sucesso - Retorna 201)
 POST {{baseUrl}}/quests
 Authorization: Bearer {{token}}
 Content-Type: application/json
@@ -112,7 +142,7 @@ Content-Type: application/json
   "difficulty": "medium"
 }
 
-### 🔴 13. Criar uma Nova Quest (Erro de Validação)
+### 🔴 3.3 Criar Quest — Erro de Validação (Retorna 400)
 POST {{baseUrl}}/quests
 Authorization: Bearer {{token}}
 Content-Type: application/json
@@ -123,16 +153,16 @@ Content-Type: application/json
   "difficulty": "invalid_difficulty"
 }
 
-### 🔵 14. Obter Quest por ID (Sucesso)
-GET {{baseUrl}}/quests/id-da-quest-aqui
+### 🔵 3.4 Obter Quest por ID (Sucesso)
+GET {{baseUrl}}/quests/{{questId}}
 Authorization: Bearer {{token}}
 
-### 🔴 15. Obter Quest por ID (Erro - Não encontrada)
+### 🔴 3.5 Obter Quest por ID Inexistente (Retorna 404)
 GET {{baseUrl}}/quests/99999999-9999-9999-9999-999999999999
 Authorization: Bearer {{token}}
 
-### 🟡 16. Atualizar uma Quest (PUT)
-PUT {{baseUrl}}/quests/id-da-quest-aqui
+### 🟡 3.6 Atualizar Quest (PUT - Sucesso)
+PUT {{baseUrl}}/quests/{{questId}}
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
@@ -141,74 +171,41 @@ Content-Type: application/json
   "difficulty": "hard"
 }
 
-### 🟢 17. Completar uma Quest
-PUT {{baseUrl}}/quests/id-da-quest-aqui/complete
+### 🟢 3.7 Completar Quest (PUT - Sucesso)
+PUT {{baseUrl}}/quests/{{questId}}/complete
 Authorization: Bearer {{token}}
 
-### 🔴 18. Completar uma Quest já completa (Erro de Validação)
-PUT {{baseUrl}}/quests/id-da-quest-aqui/complete
+### 🔴 3.8 Completar Quest já Concluída (Erro de Regra de Negócio - 400)
+PUT {{baseUrl}}/quests/{{questId}}/complete
 Authorization: Bearer {{token}}
 
-### 🟣 19. Listar Quests com Filtro (Dificuldade)
+### 🟣 3.9 Listar Quests com Filtro de Dificuldade
 GET {{baseUrl}}/quests?difficulty=hard
 Authorization: Bearer {{token}}
 
-### 🟣 20. Listar Quests com Paginação
+### 🟣 3.10 Listar Quests com Paginação
 GET {{baseUrl}}/quests?page=1&limit=2
 Authorization: Bearer {{token}}
 
-### 🟣 21. Listar Quests (Paginação + Status)
+### 🟣 3.11 Listar Quests com Filtros Combinados (Paginação + Status)
 GET {{baseUrl}}/quests?completed=true&page=1&limit=5
 Authorization: Bearer {{token}}
 
-### 🟠 22. Deletar uma Quest (Soft Delete)
-DELETE {{baseUrl}}/quests/id-da-quest-aqui
+### 🟠 3.12 Deletar Quest (Soft Delete - Retorna 200/204)
+DELETE {{baseUrl}}/quests/{{questId}}
 Authorization: Bearer {{token}}
 
-# ==========================================
-# === 🌐 ROTAS INEXISTENTES ================
-# ==========================================
-### 🔴 23. Testar Rota Inexistente (404 Global)
-GET {{baseUrl}}/rota-inexistente
 
-# ==========================================
-# === 🛡️ TESTES DE AUTORIZAÇÃO (BLOCO 6) ==
-# ==========================================
-# INSTRUÇÕES:
-# 1. Registre 2 usuários diferentes (rotas 2 e X)
-# 2. Faça login com o Usuário 1 e crie uma quest
-# 3. Anote o ID da quest criada
-# 4. Faça login com o Usuário 2 e cole o token na variável @tokenUser2
-# 5. Tente acessar/editar/deletar a quest do Usuário 1 com o token do Usuário 2
+# ==============================================================================
+# 🛡️ 4. SEGURANÇA: AUTORIZAÇÃO & ISOLAMENTO DE DADOS (MULTITENANCY)
+# ==============================================================================
 
-### 🟢 Registrar Usuário 2
-POST {{baseUrl}}/auth/register
-Content-Type: application/json
-
-{
-  "name": "Segundo Usuário",
-  "email": "usuario2@email.com",
-  "password": "password456"
-}
-
-### 🟢 Login Usuário 2
-POST {{baseUrl}}/auth/login
-Content-Type: application/json
-
-{
-  "email": "usuario2@email.com",
-  "password": "password456"
-}
-
-### 🟢 🔑
-@tokenUser2 = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRmNTk5NGU4LWNhNWUtNDVkZC1hNGJhLTY4MTBjMDMwMTRkNyIsImVtYWlsIjoidXN1YXJpbzJAZW1haWwuY29tIiwiaWF0IjoxNzg3MTUxNTczLCJleHAiOjE3ODcyMzc5NzN9.Itq3XX63T6q8qHLCG1YEaXqQmlvEs3X8zDSUIZfC1QQ
-
-### 🔴 Buscar quest do Usuário 1 com token do Usuário 2 (Espera 403)
-GET {{baseUrl}}/quests/339e37a4-f9c7-408a-a128-c53067e77ab1
+### 🔴 4.1 Buscar Quest do Usuário 1 usando Token do Usuário 2 (Espera 403 Forbidden)
+GET {{baseUrl}}/quests/{{questId}}
 Authorization: Bearer {{tokenUser2}}
 
-### 🔴 Atualizar quest do Usuário 1 com token do Usuário 2 (Espera 403)
-PUT {{baseUrl}}/quests/339e37a4-f9c7-408a-a128-c53067e77ab1
+### 🔴 4.2 Atualizar Quest do Usuário 1 usando Token do Usuário 2 (Espera 403 Forbidden)
+PUT {{baseUrl}}/quests/{{questId}}
 Authorization: Bearer {{tokenUser2}}
 Content-Type: application/json
 
@@ -216,55 +213,92 @@ Content-Type: application/json
   "title": "Tentativa de invasão!"
 }
 
-### 🔴 Deletar quest do Usuário 1 com token do Usuário 2 (Espera 403)
-DELETE {{baseUrl}}/quests/339e37a4-f9c7-408a-a128-c53067e77ab1
+### 🔴 4.3 Deletar Quest do Usuário 1 usando Token do Usuário 2 (Espera 403 Forbidden)
+DELETE {{baseUrl}}/quests/{{questId}}
 Authorization: Bearer {{tokenUser2}}
 
-### 🟢 Listar quests com Usuário 2 (Deve retornar lista VAZIA)
+### 🟢 4.4 Listar Quests com Usuário 2 (Isolamento — Não vê quests do Usuário 1)
 GET {{baseUrl}}/quests
 Authorization: Bearer {{tokenUser2}}
 
-### 🔵 CORS — Origem Permitida (Preflight OPTIONS)
-OPTIONS http://localhost:3000/quests
+
+# ==============================================================================
+# 🛡️ 5. SEGURANÇA: CORS & PREFLIGHT
+# ==============================================================================
+
+### 🔵 5.1 Preflight OPTIONS — Origem Permitida (Retorna 200 + Headers CORS)
+OPTIONS {{baseUrl}}/quests
 Origin: http://localhost:5173
 Access-Control-Request-Method: GET
 Access-Control-Request-Headers: Authorization
 
-### 🔴 CORS — Origem Bloqueada
-OPTIONS http://localhost:3000/quests
+### 🔴 5.2 Preflight OPTIONS — Origem Bloqueada (Erro de CORS)
+OPTIONS {{baseUrl}}/quests
 Origin: https://site-malicioso.com
 Access-Control-Request-Method: GET
 
-# ==========================================
-# ===     🛡️ TESTES DE SEGURANÇA         ==
-# ==========================================
 
-### 🔴 Register — Senha fraca (sem maiúscula)
-POST http://localhost:3000/auth/register
+# ==============================================================================
+# 🛡️ 6. SEGURANÇA: POLÍTICA DE SENHA FORTE (ZOD REGEX)
+# ==============================================================================
+
+### 🔴 6.1 Senha Fraca — Sem Letra Maiúscula (Espera 400)
+POST {{baseUrl}}/auth/register
 Content-Type: application/json
 
 {
-    "name": "Teste Senha",
-    "email": "senha@test.com",
-    "password": "abcd1234!"
+  "name": "Teste Senha",
+  "email": "senha_fraca1@test.com",
+  "password": "abcd1234!"
 }
 
-### 🔴 Register — Senha fraca (sem número)
-POST http://localhost:3000/auth/register
+### 🔴 6.2 Senha Fraca — Sem Número (Espera 400)
+POST {{baseUrl}}/auth/register
 Content-Type: application/json
 
 {
-    "name": "Teste Senha",
-    "email": "senha@test.com",
-    "password": "Abcdefgh!"
+  "name": "Teste Senha",
+  "email": "senha_fraca2@test.com",
+  "password": "Abcdefgh!"
 }
 
-### 🟢 Register — Senha forte (todos os critérios)
-POST http://localhost:3000/auth/register
+### 🔴 6.3 Senha Fraca — Sem Caractere Especial (Espera 400)
+POST {{baseUrl}}/auth/register
 Content-Type: application/json
 
 {
-    "name": "Teste Senha",
-    "email": "senha@test.com",
-    "password": "MinhaSenh@123"
+  "name": "Teste Senha",
+  "email": "senha_fraca3@test.com",
+  "password": "Abcdefgh123"
 }
+
+### 🟢 6.4 Senha Forte — Atende Todos os Requisitos (Espera 201)
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "Teste Senha Forte",
+  "email": "senha_forte@test.com",
+  "password": "MinhaSenh@123"
+}
+
+
+# ==============================================================================
+# 🛡️ 7. SEGURANÇA: TRATAMENTO GRANULAR DE ERROS DE JWT
+# ==============================================================================
+
+### 🔴 7.1 Token Ausente (Espera 401 — "Token de autenticação não fornecido")
+GET {{baseUrl}}/quests
+
+### 🔴 7.2 Token com Formato Inválido / Sem Prefixo Bearer (Espera 401)
+GET {{baseUrl}}/quests
+Authorization: token_sem_bearer_123
+
+### 🔴 7.3 Token Falso / Assinatura Inválida (Espera 401 — "Token de autenticação inválido")
+GET {{baseUrl}}/quests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.payload_invalido.assinatura_falsa
+
+### 🔴 7.4 Token Expirado (Espera 401 — "Token de autenticação expirado")
+# Token gerado com tempo de expiração curto já vencido:
+GET {{baseUrl}}/quests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIyMjhiYWMzLTQwOGUtNGI0MS1hNDkyLWU5ZTg5YjU3YTMzNSIsImVtYWlsIjoidXN1YXJpb0BlbWFpbC5jb20iLCJpYXQiOjE3ODczMjM2MTMsImV4cCI6MTc4NzMyMzYxNH0.tMTb4GlrLm3nFnFB0Wfh-CLDXWHuOpitl5B0aL58KmY

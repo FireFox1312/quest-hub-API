@@ -35,7 +35,9 @@ const corsOptions = {
 const app = express();
 
 //Utiliza o helmet para adicionar cabeçalhos de segurança às respostas HTTP
-app.use(helmet());
+app.use(helmet({
+    contentSecurityPolicy: false, // Desativa a política de segurança de conteúdo ( Desativado pois a API retorna apenas JSON)
+}));
 
 //Fará o parse dos dados para JSON
 app.use(express.json());
