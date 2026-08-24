@@ -17,9 +17,9 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 
 ## 🚀 Status Atual: `Sprint 9` (Em Andamento) — Segurança Avançada
 > ⚙️ **Foco da Sprint**: Endurecer a segurança da API — CORS restritivo, Helmet refinado, Rate Limiting, Password Strength, Granular JWT Errors, Security Testing e validação de variáveis de ambiente.
-- [ ] Bloco 1: CORS Restritivo + Password Strength Policy
-- [ ] Bloco 2: Helmet a Fundo + Granular JWT Error Handling
-- [ ] Bloco 3: Rate Limiting + Desafio Diferenciado (GET vs POST)
+- [x] Bloco 1: CORS Restritivo + Password Strength Policy
+- [x] Bloco 2: Helmet a Fundo + Granular JWT Error Handling
+- [x] Bloco 3: Rate Limiting + Desafio Diferenciado (GET vs POST)
 - [ ] Bloco 4: Segurança Teórica (SQL Injection, XSS, CSRF)
 - [ ] Bloco 5: Env Validation + Security Tests + Hardening Final
 
