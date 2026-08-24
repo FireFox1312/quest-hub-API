@@ -9,6 +9,8 @@ import helmet from 'helmet';
 import cors from 'cors';
 import { authMiddleware } from './middlewares/auth.js';
 import 'dotenv/config';
+import { rateLimit } from 'express-rate-limit';
+import { TooManyRequestsError } from './utils/app-error.js';
 
 //Configuração do CORS
 
@@ -31,6 +33,16 @@ const corsOptions = {
     optionsSuccessStatus: 200 // Status de sucesso para requisições OPTIONS
 };
 
+const globalRateLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutos
+    max: 100, // Limite de 100 requisições por IP
+    standardHeaders: 'draft-8',
+    legacyHeaders: false,
+    handler: (req, res, next) => {// Passa o erro para o middleware de tratamento de erros
+        next(new TooManyRequestsError('Muitas requisições feitas a partir deste IP, por favor tente novamente mais tarde.'));
+    }
+});
+
 //Objeto que vai conter todos o métodos do express
 const app = express();
 
@@ -47,6 +59,9 @@ app.use(logger);
 
 //Utiliza o middleware antes das rotas
 app.use(cors(corsOptions));
+
+//Aplica o rate limiter globalmente
+app.use(globalRateLimiter);
 
 // //Rota para o endpoint /auth, que vai usar o router definido no arquivo auth-routes.js
 app.use('/auth', authRoute);
