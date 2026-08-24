@@ -302,3 +302,50 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.payload_invalido.assi
 # Token gerado com tempo de expiração curto já vencido:
 GET {{baseUrl}}/quests
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIyMjhiYWMzLTQwOGUtNGI0MS1hNDkyLWU5ZTg5YjU3YTMzNSIsImVtYWlsIjoidXN1YXJpb0BlbWFpbC5jb20iLCJpYXQiOjE3ODczMjM2MTMsImV4cCI6MTc4NzMyMzYxNH0.tMTb4GlrLm3nFnFB0Wfh-CLDXWHuOpitl5B0aL58KmY
+
+
+# ==============================================================================
+# 🛡️ 8. SEGURANÇA: RATE LIMITING (PROTEÇÃO CONTRA ABUSO)
+# ==============================================================================
+# COMO TESTAR:
+# - Auth Rate Limit (5 req/15min): Execute a rota 8.1 rapidamente 6+ vezes seguidas.
+#   A partir da 6ª, deve retornar 429. Reinicie o servidor pra resetar o contador.
+# - Global Rate Limit (100 req/15min): Mais difícil de atingir manualmente.
+# - Quest Read Limit (100 req/15min) vs Write Limit (30 req/15min): Compare volumes.
+# - Observe os headers RateLimit-Limit, RateLimit-Remaining e RateLimit-Reset
+#   em QUALQUER resposta (eles aparecem sempre, não só no 429).
+
+### 🔴 8.1 Rate Limit Auth — Burst de Login (Execute 6+ vezes → 429 na 6ª)
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "usuario@email.com",
+  "password": "MinhaSenh@123"
+}
+
+### 🔴 8.2 Rate Limit Auth — Burst de Register (Execute 6+ vezes → 429 na 6ª)
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "Teste Rate Limit",
+  "email": "ratelimit@test.com",
+  "password": "MinhaSenh@123"
+}
+
+### 🔵 8.3 Rate Limit Quest — Leitura GET (Observe headers RateLimit-*)
+GET {{baseUrl}}/quests
+Authorization: Bearer {{token}}
+
+### 🟡 8.4 Rate Limit Quest — Escrita POST (Limite mais restritivo: 30 req/15min)
+POST {{baseUrl}}/quests
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Teste Rate Limit Escrita",
+  "category": "teste",
+  "difficulty": "easy"
+}
+
