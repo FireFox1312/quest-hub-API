@@ -11,6 +11,7 @@ import { authMiddleware } from './middlewares/auth.js';
 import 'dotenv/config';
 import { rateLimit } from 'express-rate-limit';
 import { TooManyRequestsError } from './utils/app-error.js';
+import env from './config/env.js';
 
 //Configuração do CORS
 
@@ -51,8 +52,8 @@ app.use(helmet({
     contentSecurityPolicy: false, // Desativa a política de segurança de conteúdo ( Desativado pois a API retorna apenas JSON)
 }));
 
-//Fará o parse dos dados para JSON
-app.use(express.json());
+//Limita o tamanho do corpo da requisição para 10kb
+app.use(express.json({limit: '10kb'}));
 
 //Utiliza o logger toda vez antes da requisição passar pela rota
 app.use(logger);
