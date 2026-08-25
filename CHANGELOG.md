@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.5](https://github.com/FireFox1312/quest-hub-API/compare/v0.7.0...v0.7.5) (2026-08-25)
+
+
+### Features
+
+* **auth:** enforce quest ownership verification and user isolation ([cb9130c](https://github.com/FireFox1312/quest-hub-API/commit/cb9130cfa9d2700c138c020b883146586630f4c7))
+* **auth:** implement password complexity rules and decouple login schema ([ef1f386](https://github.com/FireFox1312/quest-hub-API/commit/ef1f386df5bf8d06389889d309264ecfd964004b))
+* **config:** add environment variables validation with Zod on startup ([6a8d530](https://github.com/FireFox1312/quest-hub-API/commit/6a8d53018b56a348bd6dd1837678b76f62765f6a))
+* **error:** add TooManyRequestsError (429) to AppError hierarchy ([8b16bc6](https://github.com/FireFox1312/quest-hub-API/commit/8b16bc632770035bf81b15b2b8e5966fed8d4a66))
+* **security:** add global rate limiter and differentiated quest limits ([22e44e0](https://github.com/FireFox1312/quest-hub-API/commit/22e44e0b067c431a6302acec19547186527a2ebc))
+* **security:** add rate limiting to auth routes (5 req/15min) ([e166c8c](https://github.com/FireFox1312/quest-hub-API/commit/e166c8c5251749f6bd3138b12f5a41a94694fc31))
+* **security:** configure dynamic CORS origin whitelist via environment variables ([44f09b0](https://github.com/FireFox1312/quest-hub-API/commit/44f09b02bb276c04dedaaf0fe8c2629ecee87fec))
+* **security:** customize helmet config and disable CSP for REST API ([790764e](https://github.com/FireFox1312/quest-hub-API/commit/790764e0fbb0b259b7b1076f66b8b7bf26eafb9e))
+* **security:** limit JSON payload size to 10KB ([7295d94](https://github.com/FireFox1312/quest-hub-API/commit/7295d94432e4b39742ea7ea4d91a22fdaf0fd652))
+
+
+### Bug Fixes
+
+* **quest:** inject user ID in quest list filtering ([9ed3831](https://github.com/FireFox1312/quest-hub-API/commit/9ed3831d78163ae5ef1891b34f87f1c7b898f622))
+
 ## [0.7.0](https://github.com/FireFox1312/quest-hub-API/compare/v0.6.5...v0.7.0) (2026-08-19)
 
 
