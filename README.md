@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Node.js-v24.18.0-green?style=for-the-badge&logo=node.js" alt="Node.js Version" />
-  <img src="https://img.shields.io/badge/Sprint%20Atual-Sprint%209%20(Conclu%C3%ADda)-brightgreen?style=for-the-badge&logo=git" alt="Sprint 9 Concluída" />
+  <img src="https://img.shields.io/badge/Sprint%20Atual-Sprint%2010%20(Em%20Andamento)-orange?style=for-the-badge&logo=git" alt="Sprint 10 Em Andamento" />
   <img src="https://img.shields.io/badge/Vers%C3%A3o-v0.7.5-blue?style=for-the-badge" alt="Versão v0.7.5" />
   <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License" />
 </p>
@@ -16,13 +16,20 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 
 ---
 
-## 🚀 Status Atual: `Sprint 9` (Concluída) — Segurança Avançada & Hardening
-> ⚙️ **Foco da Sprint**: Endurecer a segurança da API — CORS restritivo com whitelist, Helmet refinado, Rate Limiting multinível, Política de Senhas Fortes, Erros Granulares de JWT, Proteção Anti-DoS (Payload Limit) e Validação Fail-Fast de Variáveis de Ambiente via Zod.
-- [x] Bloco 1: CORS Restritivo + Password Strength Policy
-- [x] Bloco 2: Helmet a Fundo + Granular JWT Error Handling
-- [x] Bloco 3: Rate Limiting + Desafio Diferenciado (GET vs POST)
-- [x] Bloco 4: Segurança Teórica (SQL Injection, XSS, CSRF)
-- [x] Bloco 5: Env Validation + Security Tests + Hardening Final
+## 🚀 Status Atual: `Sprint 10` (Em Andamento) — Documentação OpenAPI 3.0, Swagger & Governança (DX)
+> ⚙️ **Foco da Sprint**: Documentar 100% da API com especificação OpenAPI 3.0 gerada via schemas Zod (Single Source of Truth), disponibilizar interfaces interativas no Swagger UI e Scalar UI, padronizar mensagens de erro via RFC 7807 (Problem Details), mapear headers de infraestrutura e garantir governança com linting automatizado (Spectral).
+
+### 📦 Entregas & Blocos Planejados:
+- **Entrega 1: Core & Zod (`feature/swagger-core`)**
+  - [ ] Bloco 1: Setup Base Swagger UI (`/docs`), Spec Raw (`/docs/json`) e endpoint `/ping`
+  - [ ] Bloco 2: Single Source of Truth — Integração Zod → OpenAPI (`@asteasolutions/zod-to-openapi`)
+- **Entrega 2: Negócio & RFC 7807 (`feature/swagger-endpoints`)**
+  - [ ] Bloco 3: Padronização RFC 7807 (Problem Details), Schemas de Erro (4xx/5xx), Security Scheme (Bearer JWT) e Headers
+  - [ ] Bloco 4: Documentação dos Endpoints de Autenticação (`POST /auth/register`, `POST /auth/login`)
+  - [ ] Bloco 5: Documentação dos Endpoints de Quests (CRUD, Paginação, Filtros, Transições de Estado e Idempotência)
+- **Entrega 3: DX & Governança (`feature/swagger-dx`)**
+  - [ ] Bloco 6: Visualizador Moderno com Scalar UI (`/docs/scalar`) e Customização Visual do Swagger UI (Tema RPG)
+  - [ ] Bloco 7: Linter OpenAPI Automatizado (`@stoplight/spectral-cli`), Auditoria da Spec e Release v0.8.0
 
 ---
 
@@ -40,7 +47,7 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 | ✅ | **Sprint 7** | Banco de Dados Profissional: PostgreSQL, Prisma ORM e Fábrica de Repositórios (Injeção Dinâmica) |
 | ✅ | **Sprint 8** | Autenticação, Cadastro, Login, Hash de Senhas (Bcrypt), Proteção de Rotas com JWT e Autorização |
 | ✅ | **Sprint 9** | Segurança Avançada, CORS Whitelist, Helmet, Rate Limit, Anti-DoS e Validação de Env com Zod |
-| 🟨 | **Sprint 10** | Documentação via Swagger/OpenAPI |
+| 🟨 | **Sprint 10** | Documentação Interativa (Swagger/Scalar UI), OpenAPI 3.0 (Zod to OpenAPI), RFC 7807 e Spectral Linter |
 | ⬜ | **Sprint 11** | Middlewares próprios de logging e tempo de resposta |
 | ⬜ | **Sprint 12** | Testes Unitários e de Integração |
 | ⬜ | **Sprint 13** | Logging estruturado, Observabilidade e Health check |
@@ -59,6 +66,7 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 * **Bancos de Dados Profissionais**: PostgreSQL e Prisma ORM (a partir da Sprint 7)
 * **Autenticação & Criptografia**: JsonWebToken (JWT) e Bcrypt (a partir da Sprint 8)
 * **Hardening & Segurança**: Helmet, CORS (Whitelist Dinâmica), Express-Rate-Limit e Payload Limiting (a partir da Sprint 9)
+* **Documentação, Contratos & DX**: OpenAPI 3.0, Swagger UI (`swagger-ui-express`), Scalar UI (`@scalar/express-api-reference`), `@asteasolutions/zod-to-openapi` e Spectral CLI (`@stoplight/spectral-cli`) (a partir da Sprint 10)
 
 ---
 
@@ -136,3 +144,16 @@ npm start
 ```
 
 Você pode testar a API utilizando a extensão **REST Client** no VSCode através do arquivo `client.http` incluído no projeto.
+
+### 📖 Documentação Interativa da API (OpenAPI / Swagger / Scalar)
+
+Com a aplicação rodando, acesse a documentação interativa diretamente pelo navegador:
+
+* **Swagger UI**: `http://localhost:3000/docs` (Interface clássica com autenticação Bearer JWT e execução direta)
+* **OpenAPI Raw Spec (JSON)**: `http://localhost:3000/docs/json` (Contrato bruto para importação no Postman, Insomnia ou Bruno)
+* **Scalar UI**: `http://localhost:3000/docs/scalar` (Interface moderna com geração automática de code snippets em várias linguagens)
+
+Para validar a conformidade da especificação OpenAPI via linter:
+```bash
+npm run lint:docs
+```
