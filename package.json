@@ -53,5 +53,8 @@
   "devDependencies": {
     "@types/node": "^26.1.2",
     "prisma": "^7.9.1"
+  },
+  "overrides": {
+    "deepmerge-ts": "^8.0.0"
   }
 }
