@@ -12,6 +12,8 @@ import 'dotenv/config';
 import { rateLimit } from 'express-rate-limit';
 import { TooManyRequestsError } from './utils/app-error.js';
 import env from './config/env.js';
+import swaggerUi from 'swagger-ui-express';
+import swaggerSpec from './docs/swagger.js';
 
 //Configuração do CORS
 
@@ -71,6 +73,15 @@ app.use('/auth', authRoute);
 app.get('/ping', (req,res)=>{
     res.status(200).json({status: 'OK'});
 });
+
+//Rota para retornar o JSON da documentação da API (facilita a integração com ferramentas externas)
+app.get('/docs/json', (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(swaggerSpec);
+});
+
+//Rota para a documentação da API
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Adiciona o middleware de autenticação antes das rotas que precisam de autenticação
 app.use(authMiddleware); 
