@@ -6,6 +6,7 @@ import { OpenApiGeneratorV3 } from '@asteasolutions/zod-to-openapi';
 import { registry } from './registry.js';
 import './schemas/quest-schemas.js';
 import './schemas/auth-schemas.js';
+import './schemas/error-schemas.js';
 
 // Gera a documentação OpenAPI a partir dos schemas registrados
 const generator = new OpenApiGeneratorV3(registry.definitions);
