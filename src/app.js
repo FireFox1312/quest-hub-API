@@ -13,7 +13,10 @@ import { rateLimit } from 'express-rate-limit';
 import { TooManyRequestsError } from './utils/app-error.js';
 import env from './config/env.js';
 import swaggerUi from 'swagger-ui-express';
-import swaggerSpec from './docs/swagger.js';
+import swaggerSpec from './docs/swagger.js'; // Isso pode ser substituído pelo specDocs
+import specDocs from './docs/swagger.js';
+import { swaggerOptions } from './docs/options.js';
+import { apiReference } from '@scalar/express-api-reference';
 
 //Configuração do CORS
 
@@ -77,11 +80,18 @@ app.get('/ping', (req,res)=>{
 //Rota para retornar o JSON da documentação da API (facilita a integração com ferramentas externas)
 app.get('/docs/json', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
-    res.send(swaggerSpec);
+    res.send(specDocs);
 });
 
+app.use('/docs/scalar', apiReference({
+    theme: 'moon',
+    spec: {
+        content: specDocs
+    }
+}));
+
 //Rota para a documentação da API
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(specDocs, swaggerOptions));
 
 // Adiciona o middleware de autenticação antes das rotas que precisam de autenticação
 app.use(authMiddleware); 

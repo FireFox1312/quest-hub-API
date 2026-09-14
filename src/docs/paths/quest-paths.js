@@ -11,7 +11,7 @@ registry.registerPath({
     description: 'Retorna uma lista de quests cadastradas no sistema.',
     security: [
         {
-            bearerAuth: []
+            BearerAuth: []
         }
     ],
     request: {
@@ -65,7 +65,7 @@ registry.registerPath({
     description: 'Retorna os detalhes de uma quest específica.',
     security: [
         {
-            bearerAuth: []
+            BearerAuth: []
         }
     ],
     request: {
@@ -123,7 +123,7 @@ registry.registerPath({
     description: 'Cria uma nova quest com os dados fornecidos.',
     security: [
         {
-            bearerAuth: []
+            BearerAuth: []
         }
     ],
     request: {
@@ -185,7 +185,7 @@ registry.registerPath({
     description: 'Atualiza os dados de uma quest existente com os dados fornecidos.',
     security: [
         {
-            bearerAuth: []
+            BearerAuth: []
         }
     ],
     request: {
@@ -264,7 +264,7 @@ registry.registerPath({
     description: 'Marca uma quest existente como concluída.',
     security: [
         {
-            bearerAuth: []
+            BearerAuth: []
         }
     ],
     request: {
@@ -322,7 +322,7 @@ registry.registerPath({
     description: 'Exclui uma quest existente.',
     security: [
         {
-            bearerAuth: []
+            BearerAuth: []
         }
     ],
     request: {

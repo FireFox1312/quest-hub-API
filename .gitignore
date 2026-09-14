@@ -16,3 +16,5 @@ node_modules/
 skills-lock.json
 
 /src/generated/prisma
+
+openapi.json
