@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.8.0](https://github.com/FireFox1312/quest-hub-API/compare/v0.7.5...v0.8.0) (2026-09-15)
+
+
+### Features
+
+* add RFC 7807 problem details and standard error responses ([dafe653](https://github.com/FireFox1312/quest-hub-API/commit/dafe653fb44361843935b3dda08e3b6a79cb2d29))
+* add scalar ui and customize swagger dx ([fcb09f3](https://github.com/FireFox1312/quest-hub-API/commit/fcb09f32641b9e493bbd3bd673b54c522f0512c6))
+* configure BearerAuth security scheme ([fd6da9f](https://github.com/FireFox1312/quest-hub-API/commit/fd6da9fec859b4b1843057220422668cc4410198))
+* document auth endpoints with openapi registry ([5d81cd7](https://github.com/FireFox1312/quest-hub-API/commit/5d81cd759b4426f132bb3d13a70653ce7537208f))
+* document quest endpoints with security and parameters ([2377abe](https://github.com/FireFox1312/quest-hub-API/commit/2377abe74e3b40fc91788ffd54631e8ecd5499d7))
+* generate swagger spec dynamically from zod registry ([54f31de](https://github.com/FireFox1312/quest-hub-API/commit/54f31de643825404b9a68586b8d327ba76420817))
+* map zod schemas to openapi components ([1e334c7](https://github.com/FireFox1312/quest-hub-API/commit/1e334c7a103a9d66b001bc50c121d540e5175c4b))
+* setup zod-to-openapi registry and ensure early initialization ([54f89d2](https://github.com/FireFox1312/quest-hub-API/commit/54f89d266aff082c3dc0e083d2628b1d2d817092))
+
+
+### Bug Fixes
+
+* match security scheme casing for Spectral validation ([527dd98](https://github.com/FireFox1312/quest-hub-API/commit/527dd98369cf94c542e5ae84b1f640227d7156fc))
+
 ### [0.7.5](https://github.com/FireFox1312/quest-hub-API/compare/v0.7.0...v0.7.5) (2026-08-25)
 
 
