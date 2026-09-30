@@ -48,7 +48,7 @@ Esta API está sendo desenvolvida de forma **incremental e pedagógica**, onde c
 | ✅ | **Sprint 8** | Autenticação, Cadastro, Login, Hash de Senhas (Bcrypt), Proteção de Rotas com JWT e Autorização |
 | ✅ | **Sprint 9** | Segurança Avançada, CORS Whitelist, Helmet, Rate Limit, Anti-DoS e Validação de Env com Zod |
 | ✅ | **Sprint 10** | Documentação Interativa (Swagger/Scalar UI), OpenAPI 3.0 (Zod to OpenAPI), RFC 7807 e Spectral Linter |
-| ⬜ | **Sprint 11** | Middlewares próprios de logging e tempo de resposta |
+| 🟨 | **Sprint 11** | Observabilidade: Middlewares próprios de logging estruturado (JSON), tempo de resposta e integração de erros |
 | ⬜ | **Sprint 12** | Testes Unitários e de Integração |
 | ⬜ | **Sprint 13** | Logging estruturado, Observabilidade e Health check |
 | ⬜ | **Sprint 14** | Docker e Docker Compose para a API |
