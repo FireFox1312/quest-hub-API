@@ -56,6 +56,9 @@ const app = express();
 //Adiciona o middleware de tempo de resposta antes das rotas
 app.use(responseTime);
 
+//Adiciona o middleware de log antes das rotas
+app.use(logger);
+
 //Utiliza o helmet para adicionar cabeçalhos de segurança às respostas HTTP
 app.use(helmet({
     contentSecurityPolicy: false, // Desativa a política de segurança de conteúdo ( Desativado pois a API retorna apenas JSON)
@@ -63,9 +66,6 @@ app.use(helmet({
 
 //Limita o tamanho do corpo da requisição para 10kb
 app.use(express.json({limit: '10kb'}));
-
-//Utiliza o logger toda vez antes da requisição passar pela rota
-app.use(logger);
 
 //Utiliza o middleware antes das rotas
 app.use(cors(corsOptions));
