@@ -4,6 +4,7 @@ import authRoute from './routes/auth-route.js';
 import questRoute from './routes/quest-route.js';
 import { logger } from './middlewares/logger.js';
 import { responseTime } from './middlewares/response-time.js';
+import { requestId } from './middlewares/request-id.js';
 import { notFound } from './middlewares/not-found.js';
 import { errorHandler } from './middlewares/error-handle.js';
 import helmet from 'helmet';
@@ -52,6 +53,8 @@ const globalRateLimiter = rateLimit({
 
 //Objeto que vai conter todos o métodos do express
 const app = express();
+
+app.use(requestId); // Adiciona o middleware de requestId antes das rotas
 
 //Adiciona o middleware de tempo de resposta antes das rotas
 app.use(responseTime);

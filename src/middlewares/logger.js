@@ -9,6 +9,7 @@ export const logger = (req, res, next) => {
 
         const logData = {
             timestamp: hora,
+            requestId: req.requestId,
             level: level,
             method: req.method,
             url: req.originalUrl,
@@ -20,10 +21,12 @@ export const logger = (req, res, next) => {
 
         if (req.error) {
             logData.errorMessage = req.error.message;
+
             if (process.env.NODE_ENV !== 'production') {
                 logData.errorStack = req.error.stack;
             }
         }
+
         console.log(JSON.stringify(logData));
 
     })
