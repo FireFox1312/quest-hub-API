@@ -3,7 +3,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Node.js-v24.18.0-green?style=for-the-badge&logo=node.js" alt="Node.js Version" />
   <img src="https://img.shields.io/badge/Sprint%20Atual-Sprint%2011%20(Planejamento)-orange?style=for-the-badge&logo=git" alt="Sprint 11 Planejamento" />
-  <img src="https://img.shields.io/badge/Vers%C3%A3o-v0.8.0-blue?style=for-the-badge" alt="Versão v0.8.0" />
+  <img src="https://img.shields.io/badge/Vers%C3%A3o-v0.8.5-blue?style=for-the-badge" alt="Versão v0.8.5" />
   <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License" />
 </p>
 
