@@ -1,6 +1,7 @@
 import { registry } from '../registry.js';
 import { questSchema, updateQuestSchema, idParamSchema } from '../../schemas/quest-schema.js';
 import { z } from 'zod';
+import { defaultHeaders } from '../schemas/headers-schema.js';
 
 registry.registerPath({
 
@@ -25,6 +26,7 @@ registry.registerPath({
     responses: {
         '200': {
             description: 'Lista de quests retornada com sucesso.',
+            headers: defaultHeaders,
             content: {
                 'application/json': {
                     schema: z.object({
@@ -74,6 +76,7 @@ registry.registerPath({
     responses: {
         '200': {
             description: 'Detalhes da quest retornados com sucesso.',
+            headers: defaultHeaders,
             content: {
                 'application/json': {
                     schema: questSchema
@@ -144,6 +147,7 @@ registry.registerPath({
     responses: {
         '201': {
             description: 'Quest criada com sucesso.',
+            headers: defaultHeaders,
             content: {
                 'application/json': {
                     schema: questSchema
@@ -207,6 +211,7 @@ registry.registerPath({
     responses: {
         '200': {
             description: 'Quest atualizada com sucesso.',
+            headers: defaultHeaders,
             content: {
                 'application/json': {
                     schema: questSchema
@@ -273,6 +278,7 @@ registry.registerPath({
     responses: {
         '200': {
             description: 'Quest marcada como concluída com sucesso.',
+            headers: defaultHeaders,
             content: {
                 'application/json': {
                     schema: questSchema
@@ -331,6 +337,7 @@ registry.registerPath({
     responses: {
         '204': {
             description: 'Quest excluída com sucesso.',
+            headers: defaultHeaders,
         },
         '401': {
             description: 'Não autorizado.',

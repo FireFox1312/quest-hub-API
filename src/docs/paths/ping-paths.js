@@ -1,4 +1,4 @@
-
+import { defaultHeaders } from '../schemas/headers-schema.js';
 
 export const pingPaths = {
 
@@ -10,6 +10,7 @@ export const pingPaths = {
             responses: {
                 '200': {
                     description: 'Server is running',
+                    headers: defaultHeaders,
                     content: {
                         'application/json': {
                             schema: {
